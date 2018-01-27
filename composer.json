@@ -1,0 +1,33 @@
+{
+    "name": "bluetree-service/clover-reporter",
+    "type": "library",
+    "license": "Apache-2.0",
+    "description": "",
+    "keywords": [],
+    "homepage": "https://github.com/bluetree-service/clover-reporter",
+    "authors": [
+        {
+            "name": "Michał Adamiak",
+            "email": "chajr@bluetree.pl",
+            "homepage": "https://github.com/chajr",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "1.0.*",
+        "phpunit/phpunit": "4.8.35"
+    },
+    "autoload": {
+        "psr-4": {
+            "BlueData\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests/"
+        }
+    }
+}
