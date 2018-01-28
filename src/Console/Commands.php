@@ -18,8 +18,8 @@ class Commands extends Command
 
         $this->addArgument('report_file', InputArgument::REQUIRED);
         $this->addArgument('output', InputArgument::OPTIONAL, '', __DIR__ . '/output');
-        
-        $this->addOption('open-browser');
+
+        $this->addOption('open-browser', 'b');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
