@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use CloverReporter\Console\Commands;
+
+$command = new Commands;
+$application = new Application;
+
+$application->add($command);
+$application->setDefaultCommand($command->getName(), true);
+
+$application->run();
