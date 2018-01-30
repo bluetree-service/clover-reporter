@@ -20,6 +20,7 @@ class Commands extends Command
         $this->addArgument('output', InputArgument::OPTIONAL, '', __DIR__ . '/output');
 
         $this->addOption('open-browser', 'b');
+        $this->addOption('short-report', 'r');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -39,6 +40,10 @@ class Commands extends Command
 
         if ($input->getOption('open-browser')) {
             `x-www-browser $url`;
+        }
+
+        if ($input->getOption('short-report')) {
+            //display basic coverage info
         }
     }
 }
