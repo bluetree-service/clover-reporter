@@ -16,11 +16,21 @@ class Parser
     public function __construct($file, $options)
     {
         $this->options = $options;
+        $filesystem = new \Symfony\Component\Filesystem\Filesystem;
 
-        //check permisions
-        $xml = simplexml_load_string(file_get_contents($file));
+//        if ($filesystem->exists($file)) {
+//            throw new \InvalidArgumentException('File don\'t exists: ' . $file);
+//        }
 
-        $this->infoList = $this->processPackages($xml);
+        $xml = file_get_contents($file);
+
+        if (!$xml) {
+            throw new \InvalidArgumentException('Unable to access file: ' . $file);
+        }
+
+        $simpleXMLElement = simplexml_load_string($xml);
+
+        $this->infoList = $this->processPackages($simpleXMLElement);
 
         foreach ($this->infoList['files'] as $key => $fileData) {
             if ($key === 'package') {
@@ -45,7 +55,6 @@ class Parser
         
 
 //        var_dump($list);
-//        $filesystem = new \Symfony\Component\Filesystem\Filesystem;
 //
 //        $path = $list['files'][0]['path'];
 //        
