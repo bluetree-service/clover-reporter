@@ -17,35 +17,36 @@ class Parser
     {
         $this->options = $options;
         $filesystem = new \Symfony\Component\Filesystem\Filesystem;
+        $currentDir = getcwd() . '/';
+        $cloverFile = $currentDir . $file;
 
-//        if ($filesystem->exists($file)) {
-//            throw new \InvalidArgumentException('File don\'t exists: ' . $file);
-//        }
+        if (!$filesystem->exists($cloverFile)) {
+            throw new \InvalidArgumentException('File don\'t exists: ' . $cloverFile);
+        }
 
-        $xml = file_get_contents($file);
+        $xml = file_get_contents($cloverFile);
 
         if (!$xml) {
-            throw new \InvalidArgumentException('Unable to access file: ' . $file);
+            throw new \InvalidArgumentException('Unable to access file: ' . $cloverFile);
         }
 
         $simpleXMLElement = simplexml_load_string($xml);
 
         $this->infoList = $this->processPackages($simpleXMLElement);
 
-        foreach ($this->infoList['files'] as $key => $fileData) {
-            if ($key === 'package') {
-                echo($fileData);
-                echo PHP_EOL;
-
-                continue;
-            }
-
-            echo $fileData['namespace'];
-            echo PHP_EOL;
-            echo $fileData['percent'] . '%';
-            echo PHP_EOL;
-            echo PHP_EOL;
-        }
+//        foreach ($this->infoList['files'] as $key => $fileData) {
+//            if ($key === 'package') {
+//                continue;
+//            }
+//
+//            echo $fileData['package'];
+//            echo PHP_EOL;
+//            echo $fileData['namespace'];
+//            echo PHP_EOL;
+//            echo $fileData['percent'] . '%';
+//            echo PHP_EOL;
+//            echo PHP_EOL;
+//        }
 
         
         
@@ -143,6 +144,7 @@ class Parser
             foreach ($package->file as $file) {
                 $metrics = $file->class->metrics;
 
+                $list['files'][$key]['package'] = $list['files']['package'];
                 $list['files'][$key]['path'] = $file->attributes()['name']->__toString();
                 $list['files'][$key]['namespace'] = $file->class->attributes()['name']->__toString();
                 $list['files'][$key]['percent'] = $this->calculatePercent(
