@@ -34,26 +34,6 @@ class Parser
 
         $this->infoList = $this->processPackages($simpleXMLElement);
 
-//        foreach ($this->infoList['files'] as $key => $fileData) {
-//            if ($key === 'package') {
-//                continue;
-//            }
-//
-//            echo $fileData['package'];
-//            echo PHP_EOL;
-//            echo $fileData['namespace'];
-//            echo PHP_EOL;
-//            echo $fileData['percent'] . '%';
-//            echo PHP_EOL;
-//            echo PHP_EOL;
-//        }
-
-        
-        
-        
-        
-        
-        
 
 //        var_dump($list);
 //
@@ -169,7 +149,7 @@ class Parser
      */
     protected function processLine(\SimpleXMLElement $file, $key, array $list)
     {
-        if (isset($file->line)) {
+        if (isset($file->line) && !$this->options['short-report']) {
             /** @var \SimpleXMLElement $line */
             foreach ($file->line as $line) {
                 $attr = $line->attributes();
