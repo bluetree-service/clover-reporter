@@ -1,14 +1,22 @@
 #!/usr/bin/env php
 <?php
 
-require_once __DIR__ . '/../vendor/autoload.php';
+$mainDir = __DIR__ . '/../';
+
+require_once $mainDir . 'vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
 use CloverReporter\Console\Commands;
 
+$composer = json_decode(
+    file_get_contents($mainDir . 'composer.json')
+);
+
 $command = new Commands;
 $application = new Application;
 
+$application->setName($composer->description);
+$application->setVersion($composer->version);
 $application->add($command);
 $application->setDefaultCommand($command->getName(), true);
 

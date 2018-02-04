@@ -2,7 +2,8 @@
     "name": "bluetree-service/clover-reporter",
     "type": "library",
     "license": "Apache-2.0",
-    "description": "",
+    "description": "Clover report generator.",
+    "version": "v0.1.0.0",
     "keywords": [],
     "homepage": "https://github.com/bluetree-service/clover-reporter",
     "authors": [
