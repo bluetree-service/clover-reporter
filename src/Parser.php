@@ -33,43 +33,6 @@ class Parser
         $simpleXMLElement = simplexml_load_string($xml);
 
         $this->infoList = $this->processPackages($simpleXMLElement);
-
-
-//        var_dump($list);
-//
-//        $path = $list['files'][0]['path'];
-//        
-//        if (!$filesystem->exists('/home/chajr/Dropbox/C')) {
-//            $path = str_replace(
-//                '/home/chajr/Dropbox/C',
-//                '/Users/michal/projects/c',
-//                $list['files'][0]['path']
-//            );
-//        }
-//        
-//        $content = file_get_contents($path);
-//
-//        $lines = explode("\n", $content);
-//
-//        echo($list['files'][0]['namespace']);
-//        echo PHP_EOL;
-//        echo($list['files'][0]['all']);
-//        echo PHP_EOL;
-//        echo($list['files'][0]['covered']);
-//        echo PHP_EOL;
-//
-//        foreach ($lines as $number => $line) {
-//            $lineCoverage = '';
-//
-//            if (isset($list['files'][0]['info'][$number +1])) {
-//                $lineCoverage = $list['files'][0]['info'][$number +1];
-//            }
-//
-//            echo $lineCoverage . $line . PHP_EOL;
-//        }
-
-//        $dir = new Directory($list['files']);
-//        $this->processSingleFiles($xml);
     }
 
 //    protected function processSingleFiles($xml)
@@ -149,7 +112,7 @@ class Parser
      */
     protected function processLine(\SimpleXMLElement $file, $key, array $list)
     {
-        if (isset($file->line) && !$this->options['short-report']) {
+        if (isset($file->line) && !$this->options['show-coverage']) {
             /** @var \SimpleXMLElement $line */
             foreach ($file->line as $line) {
                 $attr = $line->attributes();
