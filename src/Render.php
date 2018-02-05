@@ -43,6 +43,47 @@ class Render
 
     public function shortReport()
     {
+        $this->fileProcessor(function (array $fileData, array $lines) {
+            foreach ($lines as $number => $line) {
+                if (isset($fileData['info'][$number + 1])) {
+                    $lineCoverage = $fileData['info'][$number + 1];
+
+                    if ($lineCoverage !== '0') {
+                        continue;
+                    }
+
+                    echo ($number +1) . ': ' . $line . PHP_EOL;
+                }
+
+            }
+        });
+    }
+
+    public function fullReport()
+    {
+        $this->fileProcessor(function (array $fileData, array $lines) {
+            foreach ($lines as $number => $line) {
+                $lineCoverage = '-';
+
+                if (isset($fileData['info'][$number + 1])) {
+                    $lineCoverage = $fileData['info'][$number + 1];
+                }
+
+                echo ($number + 1) . ':' . $lineCoverage . ': ' . $line . PHP_EOL;
+            }
+        });
+    }
+
+    public function htmlReport()
+    {
+        
+    }
+
+    /**
+     * @param \Closure $lineProcessor
+     */
+    protected function fileProcessor(\Closure $lineProcessor)
+    {
         $filesystem = new \Symfony\Component\Filesystem\Filesystem;
 
         foreach ($this->infoList['files'] as $key => $fileData) {
@@ -69,24 +110,9 @@ class Render
             echo $fileData['percent'] . '%';
             echo PHP_EOL;
 
-            foreach ($lines as $number => $line) {
-                if (isset($fileData['info'][$number + 1])) {
-                    $lineCoverage = $fileData['info'][$number + 1];
-                    if ($lineCoverage !== '0') {
-                        continue;
-                    }
-
-                    echo ($number +1) . ': ' . $line . PHP_EOL;
-                }
-
-            }
+            $lineProcessor($fileData, $lines);
 
             echo PHP_EOL;
         }
-    }
-
-    public function htmlReport()
-    {
-        
     }
 }
