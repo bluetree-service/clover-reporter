@@ -14,15 +14,22 @@ class Commands extends Command
     protected function configure()
     {
         $this->setName('reporter')
-            ->setDescription('Generate coverage report.')
+            ->setDescription('Generate coverage report based on clover report file.')
             ->setHelp('');
 
-        $this->addArgument('report_file', InputArgument::REQUIRED);
-        $this->addArgument('output', InputArgument::OPTIONAL, '', __DIR__ . '/output');
+        $this->addArgument('report_file', InputArgument::REQUIRED, 'clover.xml report file');
+        $this->addArgument(
+            'output',
+            InputArgument::OPTIONAL,
+            'destination of html report files',
+            dirname(getcwd()) . '/output'
+        );
 
-        $this->addOption('open-browser', 'b');
-        $this->addOption('show-coverage', 'c');     //show only coverage in percent
-        $this->addOption('short-report', 'r');      //display only uncovered lines
+        $this->addOption('open-browser', 'b', null, 'automatically open default browser with html report');
+        $this->addOption('html', 'H', null, 'generate html report version');
+        $this->addOption('show-coverage', 'c', null, 'show only classes with coverage in percent');
+        $this->addOption('short-report', 's', null, 'show coverage in percent per line with uncovered lines only');
+        $this->addOption('full-report', 'f', null, 'show coverage in percent per line with complete script');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -34,7 +41,8 @@ class Commands extends Command
         ]);
 
         $output->writeln('file: ' . $input->getArgument('report_file'));
-        $output->writeln('output: ' . $input->getArgument('output'));
+        $output->writeln('');
+//        $output->writeln('output: ' . $input->getArgument('output'));
 
         $parser = new Parser(
             $input->getArgument('report_file'),
@@ -43,17 +51,27 @@ class Commands extends Command
 
         $infoList = $parser->getInfoList();
 
-        new Render($input->getOptions(), $infoList);
+        $render = new Render($input->getOptions(), $infoList);
 
-        if ($input->getOption('open-browser')) {
+        if ($input->getOption('html')) {
+            $render->htmlReport();
+        }
+
+        if ($input->getOption('open-browser') && $input->getOption('html')) {
             $url = $input->getArgument('output') . '/index.html';
             `x-www-browser $url`;
         }
 
         if ($input->getOption('short-report')) {
-            //display basic coverage info
-        } else {
-            
+            $render->shortReport();
+        }
+
+        if ($input->getOption('full-report')) {
+            $render->fullReport();
+        }
+
+        if ($input->getOption('show-coverage')) {
+            $render->displayCoverage();
         }
     }
 }
