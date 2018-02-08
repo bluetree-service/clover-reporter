@@ -33,6 +33,10 @@ class Render
                 continue;
             }
 
+            if ($fileData['percent'] < 100) {
+                //@todo colorize percent
+            }
+
             echo $fileData['package'] . '\\' . $fileData['namespace'];
             echo PHP_EOL;
             echo $fileData['percent'] . '%';
@@ -59,6 +63,10 @@ class Render
         });
     }
 
+    /**
+     *
+     * @throws \InvalidArgumentException
+     */
     public function fullReport()
     {
         $this->fileProcessor(function (array $fileData, array $lines) {
@@ -81,6 +89,7 @@ class Render
 
     /**
      * @param \Closure $lineProcessor
+     * @throws \InvalidArgumentException
      */
     protected function fileProcessor(\Closure $lineProcessor)
     {
@@ -99,6 +108,12 @@ class Render
                     '/Users/michal/projects/c',
                     $fileData['path']
                 );
+            }
+
+            if (!$filesystem->exists($path)) {
+                throw new \InvalidArgumentException('File don\'t exists: ' . $path);
+                
+                //@todo add error style and continue;
             }
 
             $content = file_get_contents($path);
