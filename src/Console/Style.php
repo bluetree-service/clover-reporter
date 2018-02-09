@@ -15,6 +15,16 @@ class Style extends SymfonyStyle
     protected $formatter;
 
     /**
+     * @var int
+     */
+    protected $align = 20;
+
+    /**
+     * @var OutputInterface
+     */
+    protected $overrideOutput;
+
+    /**
      * Style constructor.
      *
      * @param InputInterface $input
@@ -24,8 +34,28 @@ class Style extends SymfonyStyle
     public function __construct(InputInterface $input, OutputInterface $output, Command $command)
     {
         $this->formatter = $command->getHelper('formatter');
+        $this->overrideOutput = $output;
 
         parent::__construct($input, $output);
+    }
+
+    /**
+     * @param int $align
+     * @return $this
+     */
+    public function setAlign($align)
+    {
+        $this->align = $align;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAlign()
+    {
+        return $this->align;
     }
 
     /**
@@ -33,6 +63,7 @@ class Style extends SymfonyStyle
      * @param string $message
      * @param string $style
      * @throws \InvalidArgumentException
+     * @return $this
      */
     public function formatSection($section, $message, $style = 'info')
     {
@@ -43,6 +74,8 @@ class Style extends SymfonyStyle
                 $style
             )
         );
+
+        return $this;
     }
 
     /**
@@ -50,6 +83,7 @@ class Style extends SymfonyStyle
      * @param string $style
      * @param bool $large
      * @throws \InvalidArgumentException
+     * @return $this
      */
     public function formatBlock($messages, $style, $large = false)
     {
@@ -60,83 +94,178 @@ class Style extends SymfonyStyle
                 $large
             )
         );
+
+        return $this;
     }
 
     /**
      * @param array $message
      * @throws \InvalidArgumentException
+     * @return $this
      */
     public function errorLine(array $message)
     {
         $this->writeln(
-            $this->formatter->formatBlock($message, 'error')
+            $this->formatBlock($message, 'error')
         );
+
+        return $this;
     }
 
-    public function original($input, $output)
+    /**
+     * @param string|int $strLength
+     * @param int $align
+     * @return string
+     */
+    public function align($strLength, $align)
     {
-        /** @var \Symfony\Component\Console\Helper\FormatterHelper $formatter */
+        if (is_string($strLength)) {
+            $strLength = mb_strlen($strLength);
+        }
 
-        $errorMessages = array('Error!', 'Something went wrong');
-        $formattedBlock = $formatter->formatBlock($errorMessages, 'error');
-        $output->writeln($formattedBlock);
+        $newAlign = ' ';
+        $spaces = $align - $strLength;
 
+        for ($i = 1; $i <= $spaces; $i++) {
+            $newAlign .= ' ';
+        }
 
+        return $newAlign;
+    }
 
+    /**
+     * @param $message
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
+    public function okMessage($message)
+    {
+        $alignment = $this->align(4, $this->align);
+        $this->write('<info>[OK]</info>');
+        $this->write($alignment);
+        $this->writeln($message);
 
-        $io = new SymfonyStyle($input, $output);
-        $io->title('Lorem Ipsum Dolor Sit Amet');
-        $io->section('Adding a User');
-        $io->section('Generating the Password');
-        $io->text(array(
+        return $this;
+    }
+
+    /**
+     * @param $message
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
+    public function errorMessage($message)
+    {
+        $alignment = $this->align(7, $this->align);
+        $this->write('<fg=red>[ERROR]</>');
+        $this->write($alignment);
+        $this->writeln($message);
+
+        return $this;
+    }
+
+    /**
+     * @param $message
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
+    public function warningMessage($message)
+    {
+        $alignment = $this->align(9, $this->align);
+        $this->write('<comment>[WARNING]</comment>');
+        $this->write($alignment);
+        $this->writeln($message);
+
+        return $this;
+    }
+
+    public function note($message)
+    {
+        $alignment = $this->align(0, 100);
+        $alignmentMessage = $this->align($message, 91);
+
+        $this->writeln("<bg=blue>$alignment</>");
+        $this->writeln("<fg=white;bg=blue>  [NOTE] $message$alignmentMessage</>");
+        $this->writeln("<bg=blue>$alignment</>");
+    }
+
+    public function caution($message)
+    {
+        $alignment = $this->align(0, 100);
+        $alignmentMessage = $this->align($message, 88);
+
+        $this->writeln("<bg=magenta>$alignment</>");
+        $this->writeln("<fg=white;bg=magenta>  [CAUTION] $message$alignmentMessage</>");
+        $this->writeln("<bg=magenta>$alignment</>");
+    }
+
+    public function success($message)
+    {
+        $alignment = $this->align(0, 100);
+        $alignmentMessage = $this->align($message, 88);
+
+        $this->writeln("<bg=green>$alignment</>");
+        $this->writeln("<fg=white;bg=green>  [SUCCESS] $message$alignmentMessage</>");
+        $this->writeln("<bg=green>$alignment</>");
+    }
+
+    public function warning($message)
+    {
+        $alignment = $this->align(0, 100);
+        $alignmentMessage = $this->align($message, 88);
+
+        $this->writeln("<bg=yellow>$alignment</>");
+        $this->writeln("<fg=white;bg=yellow>  [WARNING] $message$alignmentMessage</>");
+        $this->writeln("<bg=yellow>$alignment</>");
+    }
+
+    public function error($message)
+    {
+        $alignment = $this->align(0, 100);
+        $alignmentMessage = $this->align($message, 90);
+
+        $this->writeln("<bg=red>$alignment</>");
+        $this->writeln("<fg=white;bg=red>  [ERROR] $message$alignmentMessage</>");
+        $this->writeln("<bg=red>$alignment</>");
+    }
+
+    public function formatUncoveredLine($line)
+    {
+        
+    }
+
+    public function formatCoverage()
+    {
+        
+    }
+
+    public function formatFileCoverage()
+    {
+        
+    }
+
+    public function original()
+    {
+        $this->note(array(
             'Lorem ipsum dolor sit amet',
             'Consectetur adipiscing elit',
             'Aenean sit amet arcu vitae sem faucibus porta',
         ));
-        $io->listing(array(
-            'Element #1 Lorem ipsum dolor sit amet',
-            'Element #2 Lorem ipsum dolor sit amet',
-            'Element #3 Lorem ipsum dolor sit amet',
-        ));
-        $io->table(
-            array('Header 1', 'Header 2'),
-            array(
-                array('Cell 1-1', 'Cell 1-2'),
-                array('Cell 2-1', 'Cell 2-2'),
-                array('Cell 3-1', 'Cell 3-2'),
-            )
-        );
-        $io->note(array(
+        $this->caution(array(
             'Lorem ipsum dolor sit amet',
             'Consectetur adipiscing elit',
             'Aenean sit amet arcu vitae sem faucibus porta',
         ));
-        $io->caution(array(
-            'Lorem ipsum dolor sit amet',
-            'Consectetur adipiscing elit',
-            'Aenean sit amet arcu vitae sem faucibus porta',
-        ));
-        $io->success(array(
+        $this->success(array(
             'Lorem ipsum dolor sit amet',
             'Consectetur adipiscing elit',
         ));
-        $io->warning(array(
+        $this->warning(array(
             'Lorem ipsum dolor sit amet',
             'Consectetur adipiscing elit',
         ));
-        $io->error(array(
+        $this->error(array(
             'Lorem ipsum dolor sit amet',
             'Consectetur adipiscing elit',
         ));
-
-        $io->block([
-            'test',
-            'test1'
-        ]);
-
-        $io->comment([
-            'test',
-            'test1'
-        ]);
     }
 }
