@@ -86,12 +86,17 @@ class Parser
             /** @var \SimpleXMLElement $file */
             foreach ($package->file as $file) {
                 $metrics = $file->class->metrics;
+                $elements = $metrics->attributes()['elements']->__toString();
+
+                if ($elements === '0') {
+                    continue;
+                }
 
                 $list['files'][$key]['package'] = $list['files']['package'];
                 $list['files'][$key]['path'] = $file->attributes()['name']->__toString();
                 $list['files'][$key]['namespace'] = $file->class->attributes()['name']->__toString();
                 $list['files'][$key]['percent'] = $this->calculatePercent(
-                    (int)$metrics->attributes()['elements']->__toString(),
+                    (int)$elements,
                     (int)$metrics->attributes()['coveredelements']->__toString()
                 );
 
