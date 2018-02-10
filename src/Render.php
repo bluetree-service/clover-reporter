@@ -2,6 +2,8 @@
 
 namespace CloverReporter;
 
+use CloverReporter\Console\Style;
+
 class Render
 {
     /**
@@ -15,15 +17,22 @@ class Render
     protected $options;
 
     /**
+     * @var Style
+     */
+    protected $style;
+
+    /**
      * Render constructor.
      *
      * @param array $options
      * @param array $infoList
+     * @param Style $style
      */
-    public function __construct(array $options, array $infoList)
+    public function __construct(array $options, array $infoList, Style $style)
     {
         $this->options = $options;
         $this->infoList = $infoList;
+        $this->style = $style;
     }
 
     public function displayCoverage()
@@ -33,15 +42,10 @@ class Render
                 continue;
             }
 
-            if ($fileData['percent'] < 100) {
-                //@todo colorize percent
-            }
-
-            echo $fileData['package'] . '\\' . $fileData['namespace'];
-            echo PHP_EOL;
-            echo $fileData['percent'] . '%';
-            echo PHP_EOL;
-            echo PHP_EOL;
+            $this->style->formatCoverage(
+                $fileData['percent'],
+                $fileData['package'] . '\\' . $fileData['namespace']
+            );
         }
     }
 
