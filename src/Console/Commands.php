@@ -34,13 +34,27 @@ class Commands extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln([
-            'generator',
-            '============',
-            '',
-        ]);
+        $style = new Style($input, $output, $this);
+        
+//        $style->okMessage('message');
+//        $style->errorMessage('message');
+//        $style->warningMessage('message');
+//        $style->formatBlock('message', 'info');
+//        $style->formatBlock('message', 'info', true);
+//        $style->note('message');
+//        $style->warning('message');
+//        $style->caution('message');
+//        $style->success('message');
+//        $style->error('message');
 
-        $output->writeln('file: ' . $input->getArgument('report_file'));
+
+//        $style->write("\xF0\x9F\x8D\xBA");
+        
+        
+        
+        $style->title('Clover report generator. Type: {options}');
+
+        $style->formatSection('Coverage report file', $input->getArgument('report_file'));
         $output->writeln('');
 //        $output->writeln('output: ' . $input->getArgument('output'));
 
@@ -51,7 +65,7 @@ class Commands extends Command
 
         $infoList = $parser->getInfoList();
 
-        $render = new Render($input->getOptions(), $infoList);
+        $render = new Render($input->getOptions(), $infoList, $style);
 
         if ($input->getOption('html')) {
             $render->htmlReport();
