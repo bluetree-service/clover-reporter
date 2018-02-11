@@ -11,8 +11,15 @@ use CloverReporter\Render;
 
 class Commands extends Command
 {
+    /**
+     * @var string
+     */
+    protected $rootDir = '';
+
     protected function configure()
     {
+        $this->rootDir = dirname(getcwd());
+
         $this->setName('reporter')
             ->setDescription('Generate coverage report based on clover report file.')
             ->setHelp('');
@@ -22,7 +29,7 @@ class Commands extends Command
             'output',
             InputArgument::OPTIONAL,
             'destination of html report files',
-            dirname(getcwd()) . '/output'
+            $this->rootDir . '/output'
         );
 
         $this->addOption('open-browser', 'b', null, 'automatically open default browser with html report');
@@ -30,10 +37,25 @@ class Commands extends Command
         $this->addOption('show-coverage', 'c', null, 'show only classes with coverage in percent');
         $this->addOption('short-report', 's', null, 'show coverage in percent per line with uncovered lines only');
         $this->addOption('full-report', 'f', null, 'show coverage in percent per line with complete script');
+        $this->addOption(
+            'skip-dir',
+            'd',
+            InputArgument::REQUIRED,
+            'allow to skip specified dirs in root path. Dir delimiter: ";"',
+            'vendor;test;tests'
+        );
+        $this->addOption(
+            'root',
+            'r',
+            InputArgument::OPTIONAL,
+            'allow to set root project directory to show correct coverage report. By default its "dirname(getcwd())"',
+            $this->rootDir
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $startTime = microtime(true);
         $style = new Style($input, $output, $this);
         
 //        $style->okMessage('message');
@@ -52,7 +74,7 @@ class Commands extends Command
         
         
         
-        $style->title('Clover report generator. Type: {options}');
+        $style->title('Clover report generator.');
 
         $style->formatSection('Coverage report file', $input->getArgument('report_file'));
         $output->writeln('');
@@ -87,5 +109,7 @@ class Commands extends Command
         if ($input->getOption('show-coverage')) {
             $render->displayCoverage();
         }
+
+        $render->summary($startTime);
     }
 }
