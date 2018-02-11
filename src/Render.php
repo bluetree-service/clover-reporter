@@ -37,6 +37,9 @@ class Render
 
     public function displayCoverage()
     {
+        $files = count($this->infoList['files']);
+        $this->style->writeln("Found <info>$files</info> source files:");
+
         foreach ($this->infoList['files'] as $key => $fileData) {
             if ($key === 'package') {
                 continue;
@@ -133,5 +136,32 @@ class Render
 
             echo PHP_EOL;
         }
+    }
+
+    public function summary($startTime)
+    {
+        //count warnings, errors & ok
+        $this->style->newLine(2);
+        $sum = 0;
+        $count = 0;
+
+        foreach ($this->infoList['files'] as $key => $fileData) {
+            if ($key === 'package') {
+                continue;
+            }
+
+            $sum += $fileData['percent'];
+            $count++;
+        }
+
+        $coverage = $this->style->formatCoveragePercent(
+            round($sum / $count, 3)
+        );
+
+        $this->style->writeln("Total coverage: $coverage%");
+
+        $endTime = microtime(true);
+        $diff = round($endTime - $startTime, 5);
+        $this->style->formatSection('Execution time', $diff . ' sec');
     }
 }
