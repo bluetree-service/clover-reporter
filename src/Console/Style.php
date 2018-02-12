@@ -178,54 +178,76 @@ class Style extends SymfonyStyle
         return $this;
     }
 
+    /**
+     * @param string $message
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
     public function note($message)
     {
-        $alignment = $this->align(0, 100);
-        $alignmentMessage = $this->align($message, 91);
-
-        $this->writeln("<bg=blue>$alignment</>");
-        $this->writeln("<fg=white;bg=blue>  [NOTE] $message$alignmentMessage</>");
-        $this->writeln("<bg=blue>$alignment</>");
+        return $this->genericBlock($message, 'blue', 'note');
     }
 
+    /**
+     * @param string $message
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
     public function caution($message)
     {
-        $alignment = $this->align(0, 100);
-        $alignmentMessage = $this->align($message, 88);
-
-        $this->writeln("<bg=magenta>$alignment</>");
-        $this->writeln("<fg=white;bg=magenta>  [CAUTION] $message$alignmentMessage</>");
-        $this->writeln("<bg=magenta>$alignment</>");
+        return $this->genericBlock($message, 'magenta', 'caution');
     }
 
+    /**
+     * @param string $message
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
     public function success($message)
     {
-        $alignment = $this->align(0, 100);
-        $alignmentMessage = $this->align($message, 88);
-
-        $this->writeln("<bg=green>$alignment</>");
-        $this->writeln("<fg=white;bg=green>  [SUCCESS] $message$alignmentMessage</>");
-        $this->writeln("<bg=green>$alignment</>");
+        return $this->genericBlock($message, 'green', 'success');
     }
 
+    /**
+     * @param string $message
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
     public function warning($message)
     {
-        $alignment = $this->align(0, 100);
-        $alignmentMessage = $this->align($message, 88);
-
-        $this->writeln("<bg=yellow>$alignment</>");
-        $this->writeln("<fg=white;bg=yellow>  [WARNING] $message$alignmentMessage</>");
-        $this->writeln("<bg=yellow>$alignment</>");
+        return $this->genericBlock($message, 'yellow', 'warning');
     }
 
+    /**
+     * @param string $message
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
     public function error($message)
     {
-        $alignment = $this->align(0, 100);
-        $alignmentMessage = $this->align($message, 90);
+        return $this->genericBlock($message, 'red', 'error');
+    }
 
-        $this->writeln("<bg=red>$alignment</>");
-        $this->writeln("<fg=white;bg=red>  [ERROR] $message$alignmentMessage</>");
-        $this->writeln("<bg=red>$alignment</>");
+    /**
+     * @param string $message
+     * @param string $background
+     * @param string $type
+     * @param int $length
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
+    public function genericBlock($message, $background, $type, $length = 100)
+    {
+        $type = strtoupper($type);
+        $alignment = $this->align(0, $length);
+        $alignmentMessage = $this->align($message, $length - (mb_strlen($type) + 5));
+
+        $this->writeln("<bg=$background>$alignment</>");
+        $this->writeln("<fg=white;bg=$background>  [$type] $message$alignmentMessage</>");
+        $this->writeln("<bg=$background>$alignment</>");
+        $this->newLine();
+
+        return $this;
     }
 
     public function formatUncoveredLine($line)
@@ -233,9 +255,22 @@ class Style extends SymfonyStyle
         
     }
 
-    public function formatCoverage()
+    public function formatCoverage($coverage, $namespace)
     {
-        
+        $coverage = round($coverage, 3);
+
+        $align = $this->align(mb_strlen($coverage), 10);
+
+        $this->write('  - ');
+
+        $this->write($this->formatCoveragePercent($coverage));
+
+        $this->write('%');
+        $this->write($align);
+
+        $this->writeln($namespace);
+
+        return $this;
     }
 
     public function formatFileCoverage()
@@ -243,29 +278,17 @@ class Style extends SymfonyStyle
         
     }
 
-    public function original()
+    public function formatCoveragePercent($coverage)
     {
-        $this->note(array(
-            'Lorem ipsum dolor sit amet',
-            'Consectetur adipiscing elit',
-            'Aenean sit amet arcu vitae sem faucibus porta',
-        ));
-        $this->caution(array(
-            'Lorem ipsum dolor sit amet',
-            'Consectetur adipiscing elit',
-            'Aenean sit amet arcu vitae sem faucibus porta',
-        ));
-        $this->success(array(
-            'Lorem ipsum dolor sit amet',
-            'Consectetur adipiscing elit',
-        ));
-        $this->warning(array(
-            'Lorem ipsum dolor sit amet',
-            'Consectetur adipiscing elit',
-        ));
-        $this->error(array(
-            'Lorem ipsum dolor sit amet',
-            'Consectetur adipiscing elit',
-        ));
+        switch (true) {
+            case $coverage < 40:
+                return "<fg=red>$coverage</>";
+
+            case $coverage < 90:
+                return "<comment>$coverage</comment>";
+
+            default:
+                return "<info>$coverage</info>";
+        }
     }
 }
