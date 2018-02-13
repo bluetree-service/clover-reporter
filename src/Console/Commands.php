@@ -11,15 +11,8 @@ use CloverReporter\Render;
 
 class Commands extends Command
 {
-    /**
-     * @var string
-     */
-    protected $rootDir = '';
-
     protected function configure()
     {
-        $this->rootDir = dirname(getcwd());
-
         $this->setName('reporter')
             ->setDescription('Generate coverage report based on clover report file.')
             ->setHelp('');
@@ -29,7 +22,7 @@ class Commands extends Command
             'output',
             InputArgument::OPTIONAL,
             'destination of html report files',
-            $this->rootDir . '/output'
+            dirname(getcwd()) . '/output'
         );
 
         $this->addOption('open-browser', 'b', null, 'automatically open default browser with html report');
@@ -40,16 +33,9 @@ class Commands extends Command
         $this->addOption(
             'skip-dir',
             'd',
-            InputArgument::REQUIRED,
+            InputArgument::OPTIONAL,
             'allow to skip specified dirs in root path. Dir delimiter: ";"',
             'vendor;test;tests'
-        );
-        $this->addOption(
-            'root',
-            'r',
-            InputArgument::OPTIONAL,
-            'allow to set root project directory to show correct coverage report. By default its "dirname(getcwd())"',
-            $this->rootDir
         );
     }
 
