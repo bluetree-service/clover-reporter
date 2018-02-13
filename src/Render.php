@@ -30,6 +30,8 @@ class Render
      */
     public function __construct(array $options, array $infoList, Style $style)
     {
+        unset($infoList['files']['package']);
+
         $this->options = $options;
         $this->infoList = $infoList;
         $this->style = $style;
@@ -40,11 +42,7 @@ class Render
         $files = count($this->infoList['files']);
         $this->style->writeln("Found <info>$files</info> source files:");
 
-        foreach ($this->infoList['files'] as $key => $fileData) {
-            if ($key === 'package') {
-                continue;
-            }
-
+        foreach ($this->infoList['files'] as $fileData) {
             $this->style->formatCoverage(
                 $fileData['percent'],
                 $fileData['package'] . '\\' . $fileData['namespace']
@@ -102,11 +100,7 @@ class Render
     {
         $filesystem = new \Symfony\Component\Filesystem\Filesystem;
 
-        foreach ($this->infoList['files'] as $key => $fileData) {
-            if ($key === 'package') {
-                continue;
-            }
-
+        foreach ($this->infoList['files'] as $fileData) {
             $path = $fileData['path'];
 
             if (!$filesystem->exists('/home/chajr/Dropbox/C')) {
@@ -140,16 +134,12 @@ class Render
 
     public function summary($startTime)
     {
-        //count warnings, errors & ok
+        //@todo count warnings, errors & ok
         $this->style->newLine(2);
         $sum = 0;
         $count = 0;
 
-        foreach ($this->infoList['files'] as $key => $fileData) {
-            if ($key === 'package') {
-                continue;
-            }
-
+        foreach ($this->infoList['files'] as $fileData) {
             $sum += $fileData['percent'];
             $count++;
         }
