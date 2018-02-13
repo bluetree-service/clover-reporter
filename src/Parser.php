@@ -15,7 +15,7 @@ class Parser
 
     public function __construct($file, $options)
     {
-        $this->options = $options;
+        $this->options = $this->excludeDirs($options);
         $filesystem = new \Symfony\Component\Filesystem\Filesystem;
         $currentDir = getcwd() . '/';
         $cloverFile = $currentDir . $file;
@@ -33,6 +33,12 @@ class Parser
         $simpleXMLElement = simplexml_load_string($xml);
 
         $this->infoList = $this->processPackages($simpleXMLElement);
+    }
+
+    protected function excludeDirs($options)
+    {
+        $options['skip-dir'] = explode(';', $options['skip-dir']);
+        return $options;
     }
 
 //    protected function processSingleFiles($xml)
@@ -87,13 +93,14 @@ class Parser
             foreach ($package->file as $file) {
                 $metrics = $file->class->metrics;
                 $elements = $metrics->attributes()['elements']->__toString();
+                $path = $file->attributes()['name']->__toString();
 
-                if ($elements === '0') {
+                if ($elements === '0' || $this->checkDir($path)) {
                     continue;
                 }
 
+                $list['files'][$key]['path'] = $path;
                 $list['files'][$key]['package'] = $list['files']['package'];
-                $list['files'][$key]['path'] = $file->attributes()['name']->__toString();
                 $list['files'][$key]['namespace'] = $file->class->attributes()['name']->__toString();
                 $list['files'][$key]['percent'] = $this->calculatePercent(
                     (int)$elements,
@@ -105,8 +112,18 @@ class Parser
                 $key ++;
             }
         }
-
         return $list;
+    }
+
+    protected function checkDir($filePath)
+    {
+        foreach ($this->options['skip-dir'] as $dir) {
+            if (preg_match("#$dir#", $filePath)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
