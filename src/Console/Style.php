@@ -250,9 +250,19 @@ class Style extends SymfonyStyle
         return $this;
     }
 
-    public function formatUncoveredLine($line)
+    /**
+     * @param int $lineNumber
+     * @param string $line
+     * @throws \InvalidArgumentException
+     */
+    public function formatUncoveredLine($lineNumber, $line)
     {
-        
+        $endAlign = $this->align($line, 120);
+        $this->writeln(
+            "<comment>$lineNumber</comment>:"
+            . $this->align(mb_strlen($lineNumber), 6)
+            . "<error>$line$endAlign</error>"
+        );
     }
 
     /**
