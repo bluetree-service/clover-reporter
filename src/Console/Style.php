@@ -255,6 +255,12 @@ class Style extends SymfonyStyle
         
     }
 
+    /**
+     * @param float $coverage
+     * @param string $namespace
+     * @return $this
+     * @throws \InvalidArgumentException
+     */
     public function formatCoverage($coverage, $namespace)
     {
         $coverage = round($coverage, 3);
@@ -278,6 +284,10 @@ class Style extends SymfonyStyle
         
     }
 
+    /**
+     * @param float $coverage
+     * @return string
+     */
     public function formatCoveragePercent($coverage)
     {
         switch (true) {

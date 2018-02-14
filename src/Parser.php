@@ -11,6 +11,9 @@ class Parser
      */
     protected $infoList = [];
 
+    /**
+     * @var array
+     */
     protected $options = [];
 
     public function __construct($file, $options)
@@ -35,7 +38,11 @@ class Parser
         $this->infoList = $this->processPackages($simpleXMLElement);
     }
 
-    protected function excludeDirs($options)
+    /**
+     * @param array $options
+     * @return array
+     */
+    protected function excludeDirs(array $options)
     {
         $options['skip-dir'] = explode(';', $options['skip-dir']);
         return $options;
@@ -115,6 +122,10 @@ class Parser
         return $list;
     }
 
+    /**
+     * @param string $filePath
+     * @return bool
+     */
     protected function checkDir($filePath)
     {
         foreach ($this->options['skip-dir'] as $dir) {
