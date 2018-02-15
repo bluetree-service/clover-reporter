@@ -16,7 +16,14 @@ class Parser
      */
     protected $options = [];
 
-    public function __construct($file, $options)
+    /**
+     * Parser constructor.
+     *
+     * @param string $file
+     * @param array $options
+     * @throws \InvalidArgumentException
+     */
+    public function __construct($file, array $options)
     {
         $this->options = $this->excludeDirs($options);
         $filesystem = new \Symfony\Component\Filesystem\Filesystem;
