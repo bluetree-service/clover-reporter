@@ -253,16 +253,21 @@ class Style extends SymfonyStyle
     /**
      * @param int $lineNumber
      * @param string $line
+     * @param string $coverage
      * @throws \InvalidArgumentException
+     * @return $this
      */
-    public function formatUncoveredLine($lineNumber, $line)
+    public function formatUncoveredLine($lineNumber, $line, $coverage = '')
     {
         $endAlign = $this->align($line, 120);
         $this->writeln(
             "<comment>$lineNumber</comment>:"
+            . ($coverage === '' ? $coverage : "<fg=red>$coverage</>:")
             . $this->align(mb_strlen($lineNumber), 6)
             . "<error>$line$endAlign</error>"
         );
+
+        return $this;
     }
 
     /**
@@ -289,9 +294,29 @@ class Style extends SymfonyStyle
         return $this;
     }
 
-    public function formatFileCoverage()
+    /**
+     * @param int $lineNumber
+     * @param int|string $lineCoverage
+     * @param string $line
+     * @throws \InvalidArgumentException
+     * @return $this
+     */
+    public function formatCoveredLine($lineNumber, $lineCoverage, $line)
     {
-        
+        $lineColor = 'info';
+        if ($lineCoverage === '-') {
+            $lineColor = 'comment';
+        }
+
+        $endAlign = $this->align($line, 120);
+        $this->writeln(
+            "<comment>$lineNumber</comment>:"
+            . "<$lineColor>$lineCoverage</$lineColor>:"
+            . $this->align(mb_strlen($lineNumber), 6)
+            . "<$lineColor>$line$endAlign</$lineColor>"
+        );
+
+        return $this;
     }
 
     /**
