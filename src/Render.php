@@ -37,10 +37,12 @@ class Render
         $this->style = $style;
     }
 
+    /**
+     * @throws \InvalidArgumentException
+     */
     public function displayCoverage()
     {
-        $files = count($this->infoList['files']);
-        $this->style->writeln("Found <info>$files</info> source files:");
+        $this->allFiles();
 
         foreach ($this->infoList['files'] as $fileData) {
             $this->style->formatCoverage(
@@ -48,11 +50,19 @@ class Render
                 $fileData['package'] . '\\' . $fileData['namespace']
             );
         }
+
+        $this->style->newLine();
     }
 
+    /**
+     * @throws \InvalidArgumentException
+     * @return $this
+     */
     public function shortReport()
     {
-        $this->fileProcessor(function (array $fileData, array $lines) {
+        $this->allFiles()->fileProcessor(function (array $fileData, array $lines) {
+            $newLine = false;
+
             foreach ($lines as $number => $line) {
                 if (isset($fileData['info'][$number + 1])) {
                     $lineCoverage = $fileData['info'][$number + 1];
@@ -61,16 +71,37 @@ class Render
                         continue;
                     }
 
-                    echo ($number +1) . ': ' . $line . PHP_EOL;
+                    $newLine = true;
+                    $this->style->formatUncoveredLine($number +1, $line);
                 }
+            }
 
+            if ($newLine) {
+                $this->style->newLine();
             }
         });
+
+        $this->style->newLine();
+
+        return $this;
+    }
+
+    /**
+     * @throws \InvalidArgumentException
+     * @return $this
+     */
+    public function allFiles()
+    {
+        $files = count($this->infoList['files']);
+        $this->style->writeln("Found <info>$files</info> source files:");
+
+        return $this;
     }
 
     /**
      *
      * @throws \InvalidArgumentException
+     * @return $this
      */
     public function fullReport()
     {
@@ -82,9 +113,17 @@ class Render
                     $lineCoverage = $fileData['info'][$number + 1];
                 }
 
-                echo ($number + 1) . ':' . $lineCoverage . ': ' . $line . PHP_EOL;
+                if ($lineCoverage === '0') {
+                    $this->style->formatUncoveredLine($number +1, $line, 0);
+                } else {
+                    $this->style->formatCoveredLine($number, $lineCoverage, $line);
+                }
             }
+
+            $this->style->newLine();
         });
+
+        return $this;
     }
 
     public function htmlReport()
@@ -101,43 +140,37 @@ class Render
         $filesystem = new \Symfony\Component\Filesystem\Filesystem;
 
         foreach ($this->infoList['files'] as $fileData) {
+            $this->style->formatCoverage(
+                $fileData['percent'],
+                $fileData['package'] . '\\' . $fileData['namespace']
+            );
+
             $path = $fileData['path'];
 
-            if (!$filesystem->exists('/home/chajr/Dropbox/C')) {
-                $path = str_replace(
-                    '/home/chajr/Dropbox/C',
-                    '/Users/michal/projects/c',
-                    $fileData['path']
-                );
-            }
-
             if (!$filesystem->exists($path)) {
-                throw new \InvalidArgumentException('File don\'t exists: ' . $path);
-                
-                //@todo add error style and continue;
+                $this->style->errorMessage("File don't exists: <comment>$path</comment>");
+                continue;
             }
 
             $content = file_get_contents($path);
 
             $lines = explode("\n", $content);
 
-            echo $fileData['package'] . '\\' . $fileData['namespace'];
-            echo PHP_EOL;
-            echo $fileData['percent'] . '%';
-            echo PHP_EOL;
-
             $lineProcessor($fileData, $lines);
-
-            echo PHP_EOL;
         }
     }
 
+    /**
+     * @param int $startTime
+     * @throws \InvalidArgumentException
+     * @return $this
+     */
     public function summary($startTime)
     {
         //@todo count warnings, errors & ok
-        $this->style->newLine(2);
         $sum = 0;
         $count = 0;
+        $beer = '';
 
         foreach ($this->infoList['files'] as $fileData) {
             $sum += $fileData['percent'];
@@ -148,10 +181,16 @@ class Render
             round($sum / $count, 3)
         );
 
-        $this->style->writeln("Total coverage: $coverage%");
+        if ($coverage === '<info>100</info>') {
+            $beer = "\xF0\x9F\x8D\xBA";
+        }
+
+        $this->style->writeln("Total coverage: $coverage% $beer$beer$beer");
 
         $endTime = microtime(true);
         $diff = round($endTime - $startTime, 5);
         $this->style->formatSection('Execution time', $diff . ' sec');
+
+        return $this;
     }
 }
