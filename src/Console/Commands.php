@@ -17,7 +17,13 @@ class Commands extends Command
             ->setDescription('Generate coverage report based on clover report file.')
             ->setHelp('');
 
-        $this->addArgument('report_file', InputArgument::REQUIRED, 'clover.xml report file');
+        $this->addArgument(
+            'report_file',
+            InputArgument::OPTIONAL,
+            'clover.xml report file',
+            'build/logs/clover.xml'
+        );
+
         $this->addArgument(
             'output',
             InputArgument::OPTIONAL,
@@ -39,27 +45,17 @@ class Commands extends Command
         );
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int|null|void
+     * @throws \InvalidArgumentException
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $startTime = microtime(true);
         $style = new Style($input, $output, $this);
-        
-//        $style->okMessage('message');
-//        $style->errorMessage('message');
-//        $style->warningMessage('message');
-//        $style->formatBlock('message', 'info');
-//        $style->formatBlock('message', 'info', true);
-//        $style->note('message');
-//        $style->warning('message');
-//        $style->caution('message');
-//        $style->success('message');
-//        $style->error('message');
 
-
-//        $style->write("\xF0\x9F\x8D\xBA");
-        
-        
-        
         $style->title('Clover report generator.');
 
         $style->formatSection('Coverage report file', $input->getArgument('report_file'));
