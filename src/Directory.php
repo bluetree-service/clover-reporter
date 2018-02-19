@@ -6,6 +6,6 @@ class Directory
 {
     public function __construct($files)
     {
-        var_dump($files);
+//        var_dump($files);
     }
 }
