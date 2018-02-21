@@ -1,6 +1,27 @@
 Bluetree Service Clover Reporter
 ============
 
+[![Latest Stable Version](https://poser.pugx.org/bluetree-service/clover-reporter/v/stable.svg)](https://packagist.org/packages/bluetree-service/clover-reporter)
+[![Total Downloads](https://poser.pugx.org/bluetree-service/clover-reporter/downloads.svg)](https://packagist.org/packages/bluetree-service/clover-reporter)
+[![License](https://poser.pugx.org/bluetree-service/clover-reporter/license.svg)](https://packagist.org/packages/bluetree-service/clover-reporter)
+[![Dependency Status](https://www.versioneye.com/user/projects/5a8db6560fb24f45b85068bb/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a8db6560fb24f45b85068bb)
+
+##### Builds
+| Travis | Scrutinizer |
+|:---:|:---:|
+| [![Build Status](https://travis-ci.org/bluetree-service/clover-reporter.svg)](https://travis-ci.org/bluetree-service/clover-reporter) | [![Build Status](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/build-status/master) |
+
+##### Coverage
+| Coveralls | Scrutinizer |
+|:---:|:---:|
+| [![Coverage Status](https://coveralls.io/repos/github/bluetree-service/clover-reporter/badge.svg?branch=master)](https://coveralls.io/github/bluetree-service/clover-reporter?branch=master) | [![Code Coverage](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/?branch=master) |
+
+##### Quality
+| Code Climate | Scrutinizer |
+|:---:|:---:|
+| [![Code Climate](https://codeclimate.com/github/bluetree-service/clover-reporter/badges/gpa.svg)](https://codeclimate.com/github/bluetree-service/clover-reporter) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/?branch=master) | [![SensioLabsInsight](https://insight.sensiolabs.com/projects//mini.png)](https://insight.sensiolabs.com/projects/) |
+|  | [![Code Intelligence Status](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence) |  |
+
 Documentation
 --------------
 
