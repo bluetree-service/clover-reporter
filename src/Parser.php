@@ -34,7 +34,7 @@ class Parser
             throw new \InvalidArgumentException('File don\'t exists: ' . $cloverFile);
         }
 
-        $xml = file_get_contents($cloverFile);
+        $xml = @file_get_contents($cloverFile);
 
         if (!$xml) {
             throw new \InvalidArgumentException('Unable to access file: ' . $cloverFile);
@@ -51,7 +51,12 @@ class Parser
      */
     protected function excludeDirs(array $options)
     {
-        $options['skip-dir'] = explode(';', $options['skip-dir']);
+        if (empty($options['skip-dir'])) {
+            $options['skip-dir'] = [];
+        } else {
+            $options['skip-dir'] = explode(';', $options['skip-dir']);
+        }
+
         return $options;
     }
 
@@ -135,6 +140,10 @@ class Parser
      */
     protected function checkDir($filePath)
     {
+        if (empty($this->options['skip-dir'])) {
+            return false;
+        }
+
         foreach ($this->options['skip-dir'] as $dir) {
             if (preg_match("#$dir#", $filePath)) {
                 return true;
