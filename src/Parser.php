@@ -60,14 +60,6 @@ class Parser
         return $options;
     }
 
-//    protected function processSingleFiles($xml)
-//    {
-//        if (isset($xml->project->file)) {
-//            foreach ($xml->project->file as $item) {
-//                var_dump($item);
-//            }
-//        }
-//    }
     /**
      * @return array
      */

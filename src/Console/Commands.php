@@ -77,7 +77,7 @@ class Commands extends Command
 
         if ($input->getOption('open-browser') && $input->getOption('html')) {
             $url = $input->getArgument('output') . '/index.html';
-            `x-www-browser $url`;
+            shell_exec('x-www-browser' . $url);
         }
 
         if ($input->getOption('short-report')) {

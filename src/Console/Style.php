@@ -20,11 +20,6 @@ class Style extends SymfonyStyle
     protected $align = 20;
 
     /**
-     * @var OutputInterface
-     */
-    protected $overrideOutput;
-
-    /**
      * Style constructor.
      *
      * @param InputInterface $input
@@ -34,7 +29,6 @@ class Style extends SymfonyStyle
     public function __construct(InputInterface $input, OutputInterface $output, Command $command)
     {
         $this->formatter = $command->getHelper('formatter');
-        $this->overrideOutput = $output;
 
         parent::__construct($input, $output);
     }
