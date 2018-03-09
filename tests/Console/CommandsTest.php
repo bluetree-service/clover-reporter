@@ -11,7 +11,7 @@ class CreateUserCommandTest extends TestCase
 {
     public function testBasicExecute()
     {
-        $commandTester = $this->prepareCommand(['-show-coverage' => true]);
+        $commandTester = $this->prepareCommand();
 
         $output = <<<EOT
 
@@ -31,7 +31,7 @@ EOT;
 
     public function testShowCoverageExecute()
     {
-        $commandTester = $this->prepareCommand(['-show-coverage' => true]);
+        $commandTester = $this->prepareCommand(['--show-coverage' => true]);
 
         $output = <<<EOT
 
