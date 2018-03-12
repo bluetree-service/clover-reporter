@@ -1,6 +1,6 @@
 <?php
 
-namespace  SimpleLog\Test\Console;
+namespace CloverReporterTest\Console;
 
 use PHPUnit\Framework\TestCase;
 use CloverReporter\Console\Style;

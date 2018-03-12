@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleLog\Test;
+namespace CloverReporterTest;
 
 use PHPUnit\Framework\TestCase;
 use CloverReporter\Parser;
