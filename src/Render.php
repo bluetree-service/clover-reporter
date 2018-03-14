@@ -170,6 +170,7 @@ class Render
         //@todo count warnings, errors & ok
         $sum = 0;
         $count = 0;
+        $coverVal = 0;
         $beer = '';
 
         foreach ($this->infoList['files'] as $fileData) {
@@ -177,9 +178,11 @@ class Render
             $count++;
         }
 
-        $coverage = $this->style->formatCoveragePercent(
-            round($sum / $count, 3)
-        );
+        if ($count > 0) {
+            $coverVal = round($sum / $count, 3);
+        }
+
+        $coverage = $this->style->formatCoveragePercent($coverVal);
 
         if ($coverage === '<info>100</info>') {
             $beer = "\xF0\x9F\x8D\xBA";
