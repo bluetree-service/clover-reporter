@@ -1,26 +1,44 @@
 <?php
 
-namespace SimpleLog\Test\Console;
+namespace CloverReporterTest\Console;
 
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Console\Application;
 use PHPUnit\Framework\TestCase;
 use CloverReporter\Console\Commands;
 
-class CreateUserCommandTest extends TestCase
+class CommandsTest extends TestCase
 {
+    use \CloverReporterTest\Helper;
+
+    public function setUp()
+    {
+        $this->copyFixedReports('clover_log.xml');
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testIncorrectReportFile()
+    {
+        $this->prepareCommand();
+    }
+
     public function testBasicExecute()
     {
-        $commandTester = $this->prepareCommand();
+        $commandTester = $this->prepareCommand([
+            'report_file' => $this->reportPaths['fix'] . 'clover_log.xml',
+            '--skip-dir' => '',
+        ]);
 
         $output = <<<EOT
 
 Clover report generator.
 ========================
 
-[Coverage report file] build/logs/clover.xml
+[Coverage report file] tests/reports/fixed/clover_log.xml
 
-Total coverage: 19.333%
+Total coverage: 61.404%
 EOT;
 
         $this->assertEquals(
@@ -31,23 +49,25 @@ EOT;
 
     public function testShowCoverageExecute()
     {
-        $commandTester = $this->prepareCommand(['--show-coverage' => true]);
+        $commandTester = $this->prepareCommand([
+            'report_file' => $this->reportPaths['fix'] . 'clover_log.xml',
+            '--skip-dir' => '',
+            '--show-coverage' => true,
+        ]);
 
         $output = <<<EOT
 
 Clover report generator.
 ========================
 
-[Coverage report file] build/logs/clover.xml
+[Coverage report file] tests/reports/fixed/clover_log.xml
 
-Found 5 source files:
-  - 0%          CloverReporter\Console\Commands
-  - 0%          CloverReporter\Console\Style
-  - 0%          CloverReporter\Directory
-  - 96.667%     CloverReporter\Parser
-  - 0%          CloverReporter\Render
+Found 3 source files:
+  - 84.211%     SimpleLog\Log
+  - 100%        SimpleLog\LogStatic
+  - 0%          SimpleLog\Message\DefaultJsonMessage
 
-Total coverage: 19.333%
+Total coverage: 61.404%
 EOT;
 
         $this->assertEquals(
