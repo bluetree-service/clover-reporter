@@ -79,7 +79,7 @@
       <metrics loc="32" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
     <package name="SimpleLog\Message">
-      <file name="{$path}log/src/Message/DefaultJsonMessage.php">
+      <file name="{$path}log/src/DefaultJsonMessage.php">
         <class name="DefaultJsonMessage" namespace="SimpleLog\Message">
           <metrics methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>

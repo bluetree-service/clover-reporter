@@ -2,7 +2,7 @@
 <coverage generated="1514801715">
     <project timestamp="1514801715">
         <package name="BlueEvent\Event\Base">
-            <file name="{$path}event/src/Event/Base/Event.php">
+            <file name="{$path}event/src/Event.php">
                 <class name="Event" namespace="BlueEvent\Event\Base">
                     <metrics methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
                 </class>
@@ -24,7 +24,7 @@
                 <line num="98" type="stmt" count="5"/>
                 <metrics loc="100" ncloc="50" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
             </file>
-            <file name="{$path}event/src/Event/Base/EventDispatcher.php">
+            <file name="{$path}event/src/EventDispatcher.php">
                 <class name="EventDispatcher" namespace="BlueEvent\Event\Base">
                     <metrics methods="18" coveredmethods="18" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="77" elements="95" coveredelements="95"/>
                 </class>
@@ -125,7 +125,7 @@
                 <line num="360" type="stmt" count="2"/>
                 <metrics loc="362" ncloc="223" classes="1" methods="18" coveredmethods="18" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="77" elements="95" coveredelements="95"/>
             </file>
-            <file name="{$path}event/src/Event/Base/EventLog.php">
+            <file name="{$path}event/src/EventLog.php">
                 <class name="EventLog" namespace="BlueEvent\Event\Base">
                     <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="22" coveredelements="22"/>
                 </class>
@@ -154,11 +154,11 @@
                 <metrics loc="92" ncloc="60" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="22" coveredelements="22"/>
             </file>
         </package>
-        <file name="{$path}event/src/Event/Base/Interfaces/EventInterface.php">
+        <file name="{$path}event/src/EventInterface.php">
             <metrics loc="20" ncloc="13" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
         </file>
         <package name="BlueEvent\Event">
-            <file name="{$path}event/src/Event/BaseEvent.php">
+            <file name="{$path}event/src/BaseEvent.php">
                 <class name="BaseEvent" namespace="BlueEvent\Event">
                     <metrics methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
                 </class>
