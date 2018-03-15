@@ -76,7 +76,46 @@ EOT;
         );
     }
 
-//    public function testShowShortReportExecute()
+    public function testShowShortReportExecute()
+    {
+        $commandTester = $this->prepareCommand([
+            'report_file' => $this->reportPaths['fix'] . 'clover_log.xml',
+            '--skip-dir' => '',
+            '--short-report' => true
+        ]);
+
+        $output = <<<EOT
+
+Clover report generator.
+========================
+
+[Coverage report file] tests/reports/fixed/clover_log.xml
+
+Found 3 source files:
+  - 84.211%     SimpleLog\Log
+93:         {
+94:             if (\$this->defaultParams['storage'] instanceof StorageInterface) {
+107:        {
+108:            if (\$this->defaultParams['message'] instanceof MessageInterface) {
+
+  - 100%        SimpleLog\LogStatic
+  - 0%          SimpleLog\Message\DefaultJsonMessage
+18:          * @param string|array|object \$message
+21:          */
+26:             list(\$date, \$time) = explode(';', strftime(self::DATE_FORMAT . ';' . self::TIME_FORMAT, time()));
+28:             \$this->messageScheme['date'] = \$date;
+
+
+Total coverage: 61.404%
+EOT;
+
+        $this->assertEquals(
+            $output,
+            $this->clearExecutionTime($commandTester->getDisplay())
+        );
+    }
+
+//    public function testShowShortReportExecuteWithErrors()
 //    {
 //        $commandTester = $this->prepareCommand(['--short-report' => true]);
 //
