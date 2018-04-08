@@ -111,39 +111,49 @@ EOT;
 
         $this->assertEquals(
             $output,
-            $this->clearExecutionTime($commandTester->getDisplay())
+            $this->clearSpaces(
+                $this->clearExecutionTime(
+                    $commandTester->getDisplay()
+                )
+            )
         );
     }
 
-//    public function testShowShortReportExecuteWithErrors()
-//    {
-//        $commandTester = $this->prepareCommand(['--short-report' => true]);
-//
-////        var_dump($commandTester->getDisplay());
-////        var_dump($this->clearExecutionTime($commandTester->getDisplay()));
-////        exit;
-//
-//        $output = <<<EOT
-//
-//Clover report generator.
-//========================
-//
-//[Coverage report file] build/logs/clover.xml
-//
-//Found 5 source files:
-//  - 0%          CloverReporter\Console\Commands
-//[ERROR]              File don't exists: /home/chajr/Dropbox/C/clover-reporter/src/Console/Commands.php
-//  - 0%          CloverReporter\Console\Style
-//[ERROR]              File don't exists: /home/chajr/Dropbox/C/clover-reporter/src/Console/Style.php
-//  - 0%          CloverReporter\Directory
-//[ERROR]              File don't exists: /home/chajr/Dro
-//EOT;
-//
-//        $this->assertEquals(
-//            $output,
-//            $this->clearExecutionTime($commandTester->getDisplay())
-//        );
-//    }
+    public function testShowShortReportExecuteWithErrors()
+    {
+        $commandTester = $this->prepareCommand([
+            'report_file' => $this->reportPaths['base'] . 'clover_log.xml',
+            '--skip-dir' => '',
+            '--short-report' => true
+        ]);
+
+        $output = <<<EOT
+
+Clover report generator.
+========================
+
+[Coverage report file] tests/reports/clover_log.xml
+
+Found 3 source files:
+  - 84.211%     SimpleLog\\Log
+[ERROR]              File don't exists: {\$path}log/src/Log.php
+  - 100%        SimpleLog\\LogStatic
+[ERROR]              File don't exists: {\$path}log/src/LogStatic.php
+  - 0%          SimpleLog\\Message\\DefaultJsonMessage
+[ERROR]              File don't exists: {\$path}log/src/DefaultJsonMessage.php
+
+Total coverage: 61.404%
+EOT;
+
+        $this->assertEquals(
+            $output,
+            $this->clearSpaces(
+                $this->clearExecutionTime(
+                    $commandTester->getDisplay()
+                )
+            )
+        );
+    }
 
     /**
      * @param string $report
@@ -152,6 +162,15 @@ EOT;
     protected function clearExecutionTime($report)
     {
         return substr($report, 0, strrpos($report, " \n[Execution"));
+    }
+
+    /**
+     * @param string $report
+     * @return string
+     */
+    protected function clearSpaces($report)
+    {
+        return preg_replace('#[ ]+\n#', "\n", $report);
     }
 
     /**
