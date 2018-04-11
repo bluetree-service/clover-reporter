@@ -126,10 +126,10 @@ class Render
         return $this;
     }
 
-    public function htmlReport()
-    {
-        
-    }
+//    public function htmlReport()
+//    {
+//        
+//    }
 
     /**
      * @param \Closure $lineProcessor

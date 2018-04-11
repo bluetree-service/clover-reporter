@@ -71,14 +71,15 @@ class Commands extends Command
 
         $render = new Render($input->getOptions(), $infoList, $style);
 
-        if ($input->getOption('html')) {
-            $render->htmlReport();
-        }
+        /** @todo in future make report generation in html */
+//        if ($input->getOption('html')) {
+//            $render->htmlReport();
+//        }
 
-        if ($input->getOption('open-browser') && $input->getOption('html')) {
-            $url = $input->getArgument('output') . '/index.html';
-            shell_exec('x-www-browser' . $url);
-        }
+//        if ($input->getOption('open-browser') && $input->getOption('html')) {
+//            $url = $input->getArgument('output') . '/index.html';
+//            shell_exec('x-www-browser' . $url);
+//        }
 
         if ($input->getOption('short-report')) {
             $render->shortReport();
