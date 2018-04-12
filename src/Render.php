@@ -193,7 +193,25 @@ class Render
         $endTime = microtime(true);
         $diff = round($endTime - $startTime, 5);
         $this->style->formatSection('Execution time', $diff . ' sec');
+        $this->style->formatSection(
+            'Memory used',
+            $this->bytes(memory_get_usage(true))
+        );
 
         return $this;
+    }
+
+    /**
+     * @param int $bytes
+     * @return string
+     */
+    public function bytes($bytes)
+    {
+        $format = '%01.2f %s';
+        $units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB'];
+        $mod = 1000;
+        $power = ($bytes > 0) ? floor(log($bytes, $mod)) : 0;
+
+        return sprintf($format, $bytes / ($mod ** $power), $units[$power]);
     }
 }
