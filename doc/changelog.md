@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.1.2.0 - 2018-04-30
+### Fixed
+* Binary file: fixed namespaces and bin file name changed
+
 ## 0.1.1.0 - 2018-04-26
 ### Added
 * Memory usage at output
