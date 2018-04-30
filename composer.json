@@ -35,6 +35,6 @@
         }
     },
     "bin": [
-        "bin/generate"
+        "bin/clover_reporter"
     ]
 }
