@@ -255,7 +255,7 @@ class Style extends SymfonyStyle
     {
         $endAlign = $this->align($line, 120);
         $this->writeln(
-            "<comment>$lineNumber</comment>:"
+            "     <comment>$lineNumber</comment>:"
             . ($coverage === '' ? $coverage : "<fg=red>$coverage</>:")
             . $this->align(mb_strlen($lineNumber), 6)
             . "<error>$line$endAlign</error>"
@@ -304,7 +304,7 @@ class Style extends SymfonyStyle
 
         $endAlign = $this->align($line, 120);
         $this->writeln(
-            "<comment>$lineNumber</comment>:"
+            "     <comment>$lineNumber</comment>:"
             . "<$lineColor>$lineCoverage</$lineColor>:"
             . $this->align(mb_strlen($lineNumber), 6)
             . "<$lineColor>$line$endAlign</$lineColor>"

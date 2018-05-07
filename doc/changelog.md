@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.1.3.0 - 2018-05-07
+### Changed
+* Some formatting improvements
+
 ## 0.1.2.1 - 2018-04-30
 ### Fixed
 * composer.json version
