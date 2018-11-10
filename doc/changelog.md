@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.1.4.2 - 2018-11-10
+### Fixed
+* Library version in composer.json file
+
 ## 0.1.4.1 - 2018-11-10
 ### Removed
 * composer.lock hard remove
