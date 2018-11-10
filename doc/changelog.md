@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.1.4.0 - 2018-11-10
+### Changed
+* Updated libraries version
+### Removed
+* composer.lock
+
 ## 0.1.3.1 - 2018-05-07
 ### Changed
 * Test fixes
