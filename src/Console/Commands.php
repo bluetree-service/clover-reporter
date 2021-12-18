@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CloverReporter\Console;
 
 use Symfony\Component\Console\Command\Command;
@@ -11,7 +13,7 @@ use CloverReporter\Render;
 
 class Commands extends Command
 {
-    protected function configure()
+    protected function configure(): void
     {
         $this->setName('reporter')
             ->setDescription('Generate coverage report based on clover report file.')
@@ -28,7 +30,7 @@ class Commands extends Command
             'output',
             InputArgument::OPTIONAL,
             'destination of html report files',
-            dirname(getcwd()) . '/output'
+            \dirname(\getcwd()) . '/output'
         );
 
         $this->addOption('open-browser', 'b', null, 'automatically open default browser with html report');
@@ -48,19 +50,17 @@ class Commands extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @return int|null|void
      * @throws \InvalidArgumentException
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
-        $startTime = microtime(true);
+        $startTime = \microtime(true);
         $style = new Style($input, $output, $this);
 
         $style->title('Clover report generator.');
 
         $style->formatSection('Coverage report file', $input->getArgument('report_file'));
         $output->writeln('');
-//        $output->writeln('output: ' . $input->getArgument('output'));
 
         $parser = new Parser(
             $input->getArgument('report_file'),
@@ -72,14 +72,14 @@ class Commands extends Command
         $render = new Render($input->getOptions(), $infoList, $style);
 
         /** @todo in future make report generation in html */
-//        if ($input->getOption('html')) {
-//            $render->htmlReport();
-//        }
+        if ($input->getOption('html')) {
+            $render->htmlReport();
+        }
 
-//        if ($input->getOption('open-browser') && $input->getOption('html')) {
-//            $url = $input->getArgument('output') . '/index.html';
-//            shell_exec('x-www-browser' . $url);
-//        }
+        if ($input->getOption('open-browser') && $input->getOption('html')) {
+            $url = $input->getArgument('output') . '/index.html';
+            \shell_exec('x-www-browser' . $url);
+        }
 
         if ($input->getOption('short-report')) {
             $render->shortReport();

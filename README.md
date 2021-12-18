@@ -9,7 +9,7 @@ Bluetree Service Clover Reporter
 ##### Builds
 | Travis | Scrutinizer |
 |:---:|:---:|
-| [![Build Status](https://travis-ci.org/bluetree-service/clover-reporter.svg)](https://travis-ci.org/bluetree-service/clover-reporter) | [![Build Status](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/build-status/master) |
+| [![Build Status](https://app.travis-ci.org/bluetree-service/clover-reporter.svg)](https://app.travis-ci.com/github/bluetree-service/clover-reporter) | [![Build Status](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/build-status/master) |
 
 ##### Coverage
 | Coveralls | Scrutinizer |
@@ -17,9 +17,9 @@ Bluetree Service Clover Reporter
 | [![Coverage Status](https://coveralls.io/repos/github/bluetree-service/clover-reporter/badge.svg?branch=master)](https://coveralls.io/github/bluetree-service/clover-reporter?branch=master) | [![Code Coverage](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/?branch=master) |
 
 ##### Quality
-| Code Climate | Scrutinizer |
+| Code Climate | SymfonyInsight |
 |:---:|:---:|
-| [![Code Climate](https://codeclimate.com/github/bluetree-service/clover-reporter/badges/gpa.svg)](https://codeclimate.com/github/bluetree-service/clover-reporter) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/?branch=master) | [![SensioLabsInsight](https://insight.sensiolabs.com/projects//mini.png)](https://insight.sensiolabs.com/projects/) |
+| [![Code Climate](https://codeclimate.com/github/bluetree-service/clover-reporter/badges/gpa.svg)](https://codeclimate.com/github/bluetree-service/clover-reporter) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/?branch=master) | [![SymfonyInsight](https://insight.symfony.com/projects/fa301fd1-ad6e-401e-b660-62fc3612c9e3/mini.svg)](https://insight.symfony.com/projects/fa301fd1-ad6e-401e-b660-62fc3612c9e3) |
 |  | [![Code Intelligence Status](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence) |  |
 
 Documentation
@@ -73,7 +73,7 @@ Project description
 
 ### Requirements
 
-* PHP 5.6 or higher
+* PHP 7.3 or higher
 
 Change log
 --------------

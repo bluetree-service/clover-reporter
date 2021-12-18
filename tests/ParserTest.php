@@ -9,19 +9,15 @@ class ParserTest extends TestCase
 {
     use \CloverReporterTest\Helper;
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testCreateParserForNotExistingFile()
+    public function testCreateParserForNotExistingFile(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         new Parser('plik', ['skip-dir' => '']);
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testCreateParserForNoneAccessibleFile()
     {
+        $this->expectException(\InvalidArgumentException::class);
         new Parser('tests/reports/no_accessible.xml', ['skip-dir' => '']);
     }
 

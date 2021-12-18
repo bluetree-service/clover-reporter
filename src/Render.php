@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CloverReporter;
 
 use CloverReporter\Console\Style;
+use Symfony\Component\Filesystem\Filesystem;
 
 class Render
 {
@@ -20,6 +23,11 @@ class Render
      * @var Style
      */
     protected $style;
+
+    /**
+     * @var string
+     */
+    public $beerSymbol = "\xF0\x9F\x8D\xBA";
 
     /**
      * Render constructor.
@@ -40,7 +48,7 @@ class Render
     /**
      * @throws \InvalidArgumentException
      */
-    public function displayCoverage()
+    public function displayCoverage(): void
     {
         $this->allFiles();
 
@@ -58,7 +66,7 @@ class Render
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function shortReport()
+    public function shortReport(): self
     {
         $this->allFiles()->fileProcessor(function (array $fileData, array $lines) {
             $newLine = false;
@@ -72,7 +80,7 @@ class Render
                     }
 
                     $newLine = true;
-                    $this->style->formatUncoveredLine($number +1, $line);
+                    $this->style->formatUncoveredLine($number + 1, $line);
                 }
             }
 
@@ -90,9 +98,9 @@ class Render
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function allFiles()
+    public function allFiles(): self
     {
-        $files = count($this->infoList['files']);
+        $files = \count($this->infoList['files']);
         $this->style->writeln("Found <info>$files</info> source files:");
 
         return $this;
@@ -103,18 +111,14 @@ class Render
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function fullReport()
+    public function fullReport(): self
     {
         $this->fileProcessor(function (array $fileData, array $lines) {
             foreach ($lines as $number => $line) {
-                $lineCoverage = '-';
-
-                if (isset($fileData['info'][$number + 1])) {
-                    $lineCoverage = $fileData['info'][$number + 1];
-                }
+                $lineCoverage = $fileData['info'][$number + 1] ?? '-';
 
                 if ($lineCoverage === '0') {
-                    $this->style->formatUncoveredLine($number +1, $line, 0);
+                    $this->style->formatUncoveredLine($number + 1, $line, '0');
                 } else {
                     $this->style->formatCoveredLine($number, $lineCoverage, $line);
                 }
@@ -126,18 +130,18 @@ class Render
         return $this;
     }
 
-//    public function htmlReport()
-//    {
-//        
-//    }
+    public function htmlReport(): self
+    {
+        return $this;
+    }
 
     /**
      * @param \Closure $lineProcessor
      * @throws \InvalidArgumentException
      */
-    protected function fileProcessor(\Closure $lineProcessor)
+    protected function fileProcessor(\Closure $lineProcessor): void
     {
-        $filesystem = new \Symfony\Component\Filesystem\Filesystem;
+        $filesystem = new Filesystem();
 
         foreach ($this->infoList['files'] as $fileData) {
             $this->style->formatCoverage(
@@ -152,20 +156,19 @@ class Render
                 continue;
             }
 
-            $content = file_get_contents($path);
-
-            $lines = explode("\n", $content);
+            $content = \file_get_contents($path);
+            $lines = \explode("\n", $content);
 
             $lineProcessor($fileData, $lines);
         }
     }
 
     /**
-     * @param int $startTime
+     * @param float $startTime
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function summary($startTime)
+    public function summary(float $startTime): self
     {
         //@todo count warnings, errors & ok
         $sum = 0;
@@ -179,23 +182,23 @@ class Render
         }
 
         if ($count > 0) {
-            $coverVal = round($sum / $count, 3);
+            $coverVal = \round($sum / $count, 3);
         }
 
         $coverage = $this->style->formatCoveragePercent($coverVal);
 
         if ($coverage === '<info>100</info>') {
-            $beer = "\xF0\x9F\x8D\xBA";
+            $beer = $this->beerSymbol;
         }
 
         $this->style->writeln("Total coverage: $coverage% $beer$beer$beer");
 
-        $endTime = microtime(true);
-        $diff = round($endTime - $startTime, 5);
+        $endTime = \microtime(true);
+        $diff = \round($endTime - $startTime, 5);
         $this->style->formatSection('Execution time', $diff . ' sec');
         $this->style->formatSection(
             'Memory used',
-            $this->bytes(memory_get_usage(true))
+            $this->bytes(\memory_get_usage(true))
         );
 
         return $this;
@@ -205,13 +208,13 @@ class Render
      * @param int $bytes
      * @return string
      */
-    public function bytes($bytes)
+    public function bytes(int $bytes): string
     {
         $format = '%01.2f %s';
         $units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB'];
         $mod = 1000;
-        $power = ($bytes > 0) ? floor(log($bytes, $mod)) : 0;
+        $power = ($bytes > 0) ? \floor(\log($bytes, $mod)) : 0;
 
-        return sprintf($format, $bytes / ($mod ** $power), $units[$power]);
+        return \sprintf($format, $bytes / ($mod ** $power), $units[$power]);
     }
 }

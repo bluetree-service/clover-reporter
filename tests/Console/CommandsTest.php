@@ -11,17 +11,15 @@ class CommandsTest extends TestCase
 {
     use \CloverReporterTest\Helper;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->copyFixedReports('clover_log.xml');
         $this->copyFixedReports('clover_100_percent.xml');
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
-    public function testIncorrectReportFile()
+    public function testIncorrectReportFile(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->prepareCommand();
     }
 
@@ -505,7 +503,7 @@ EOT;
      */
     protected function clearExecutionTime($report)
     {
-        return substr($report, 0, strrpos($report, "\n[Execution"));
+        return \substr($report, 0, \strrpos($report, "\n[Execution"));
     }
 
     /**
@@ -514,7 +512,7 @@ EOT;
      */
     protected function clearSpaces($report)
     {
-        return preg_replace('#[ ]+\n#', "\n", $report);
+        return \preg_replace('#[ ]+\n#', "\n", $report);
     }
 
     /**
@@ -523,16 +521,16 @@ EOT;
      */
     protected function prepareCommand(array $parameters = [])
     {
-        $application = new Application;
+        $application = new Application();
 
-        $application->add(new Commands);
+        $application->add(new Commands());
 
         $command = $application->find('reporter');
 
         $commandTester = new CommandTester($command);
 
         $commandTester->execute(
-            array_merge(
+            \array_merge(
                 ['command' => $command->getName()],
                 $parameters
             ),

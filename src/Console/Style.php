@@ -1,11 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CloverReporter\Console;
 
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+
+use function mb_strlen;
 
 class Style extends SymfonyStyle
 {
@@ -37,7 +41,7 @@ class Style extends SymfonyStyle
      * @param int $align
      * @return $this
      */
-    public function setAlign($align)
+    public function setAlign(int $align): self
     {
         $this->align = $align;
 
@@ -47,7 +51,7 @@ class Style extends SymfonyStyle
     /**
      * @return int
      */
-    public function getAlign()
+    public function getAlign(): int
     {
         return $this->align;
     }
@@ -59,7 +63,7 @@ class Style extends SymfonyStyle
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function formatSection($section, $message, $style = 'info')
+    public function formatSection(string $section, string $message, string $style = 'info'): self
     {
         $this->writeln(
             $this->formatter->formatSection(
@@ -79,7 +83,7 @@ class Style extends SymfonyStyle
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function formatBlock($messages, $style, $large = false)
+    public function formatBlock($messages, string $style, bool $large = false): self
     {
         $this->writeln(
             $this->formatter->formatBlock(
@@ -97,7 +101,7 @@ class Style extends SymfonyStyle
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function errorLine(array $message)
+    public function errorLine(array $message): self
     {
         $this->writeln(
             $this->formatBlock($message, 'error')
@@ -107,16 +111,12 @@ class Style extends SymfonyStyle
     }
 
     /**
-     * @param string|int $strLength
+     * @param int $strLength
      * @param int $align
      * @return string
      */
-    public function align($strLength, $align)
+    public function align(int $strLength, int $align): string
     {
-        if (is_string($strLength)) {
-            $strLength = mb_strlen($strLength);
-        }
-
         $newAlign = ' ';
         $spaces = $align - $strLength;
 
@@ -128,11 +128,11 @@ class Style extends SymfonyStyle
     }
 
     /**
-     * @param $message
+     * @param mixed $message
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function okMessage($message)
+    public function okMessage($message): self
     {
         $alignment = $this->align(4, $this->align);
         $this->write('<info>[OK]</info>');
@@ -143,11 +143,11 @@ class Style extends SymfonyStyle
     }
 
     /**
-     * @param $message
+     * @param mixed $message
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function errorMessage($message)
+    public function errorMessage($message): self
     {
         $alignment = $this->align(7, $this->align);
         $this->write('<fg=red>[ERROR]</>');
@@ -158,11 +158,11 @@ class Style extends SymfonyStyle
     }
 
     /**
-     * @param $message
+     * @param mixed $message
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function warningMessage($message)
+    public function warningMessage($message): self
     {
         $alignment = $this->align(9, $this->align);
         $this->write('<comment>[WARNING]</comment>');
@@ -177,7 +177,7 @@ class Style extends SymfonyStyle
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function note($message)
+    public function note($message): self
     {
         return $this->genericBlock($message, 'blue', 'note');
     }
@@ -187,7 +187,7 @@ class Style extends SymfonyStyle
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function caution($message)
+    public function caution($message): self
     {
         return $this->genericBlock($message, 'magenta', 'caution');
     }
@@ -197,7 +197,7 @@ class Style extends SymfonyStyle
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function success($message)
+    public function success($message): self
     {
         return $this->genericBlock($message, 'green', 'success');
     }
@@ -207,7 +207,7 @@ class Style extends SymfonyStyle
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function warning($message)
+    public function warning($message): self
     {
         return $this->genericBlock($message, 'yellow', 'warning');
     }
@@ -217,7 +217,7 @@ class Style extends SymfonyStyle
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function error($message)
+    public function error($message): self
     {
         return $this->genericBlock($message, 'red', 'error');
     }
@@ -230,11 +230,11 @@ class Style extends SymfonyStyle
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function genericBlock($message, $background, $type, $length = 100)
+    public function genericBlock(string $message, string $background, string $type, int $length = 100): self
     {
-        $type = strtoupper($type);
+        $type = \strtoupper($type);
         $alignment = $this->align(0, $length);
-        $alignmentMessage = $this->align($message, $length - (mb_strlen($type) + 5));
+        $alignmentMessage = $this->align(mb_strlen($message), $length - (mb_strlen($type) + 5));
 
         $this->writeln("<bg=$background>$alignment</>");
         $this->writeln("<fg=white;bg=$background>  [$type] $message$alignmentMessage</>");
@@ -251,13 +251,13 @@ class Style extends SymfonyStyle
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function formatUncoveredLine($lineNumber, $line, $coverage = '')
+    public function formatUncoveredLine(int $lineNumber, string $line, string $coverage = ''): self
     {
-        $endAlign = $this->align($line, 120);
+        $endAlign = $this->align(mb_strlen($line), 120);
         $this->writeln(
             "     <comment>$lineNumber</comment>:"
             . ($coverage === '' ? $coverage : "<fg=red>$coverage</>:")
-            . $this->align(mb_strlen($lineNumber), 6)
+            . $this->align(mb_strlen((string) $lineNumber), 6)
             . "<error>$line$endAlign</error>"
         );
 
@@ -270,19 +270,16 @@ class Style extends SymfonyStyle
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function formatCoverage($coverage, $namespace)
+    public function formatCoverage(float $coverage, string $namespace): self
     {
-        $coverage = round($coverage, 3);
+        $coverage = \round($coverage, 3);
 
-        $align = $this->align(mb_strlen($coverage), 10);
+        $align = $this->align(mb_strlen((string) $coverage), 10);
 
         $this->write('  - ');
-
         $this->write($this->formatCoveragePercent($coverage));
-
         $this->write('%');
         $this->write($align);
-
         $this->writeln($namespace);
 
         return $this;
@@ -295,18 +292,18 @@ class Style extends SymfonyStyle
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function formatCoveredLine($lineNumber, $lineCoverage, $line)
+    public function formatCoveredLine(int $lineNumber, $lineCoverage, string $line): self
     {
         $lineColor = 'info';
         if ($lineCoverage === '-') {
             $lineColor = 'comment';
         }
 
-        $endAlign = $this->align($line, 120);
+        $endAlign = $this->align(mb_strlen($line), 120);
         $this->writeln(
             "     <comment>$lineNumber</comment>:"
             . "<$lineColor>$lineCoverage</$lineColor>:"
-            . $this->align(mb_strlen($lineNumber), 6)
+            . $this->align(mb_strlen((string) $lineNumber), 6)
             . "<$lineColor>$line$endAlign</$lineColor>"
         );
 
@@ -317,7 +314,7 @@ class Style extends SymfonyStyle
      * @param float $coverage
      * @return string
      */
-    public function formatCoveragePercent($coverage)
+    public function formatCoveragePercent(float $coverage): string
     {
         switch (true) {
             case $coverage < 40:

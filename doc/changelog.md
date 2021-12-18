@@ -1,6 +1,17 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.2.0.0 - 2021-12-18
+### Added
+* New php versions support 7.3, 7.4, 8.0
+### Removed
+* Unused part of code
+* PHP version support 5.6, 7.0, 7.1, 7.2
+### Changed
+* Enabled commented function
+* Updated required libraries
+* Code improvements
+
 ## 0.1.4.3 - 2019-01-13
 ### Added
 * New php versions for test

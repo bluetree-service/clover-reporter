@@ -3,7 +3,6 @@
     "type": "library",
     "license": "Apache-2.0",
     "description": "Clover report generator.",
-    "version": "v0.1.4.2",
     "keywords": [],
     "homepage": "https://github.com/bluetree-service/clover-reporter",
     "authors": [
@@ -15,14 +14,15 @@
         }
     ],
     "require": {
-        "php": ">=5.6.0",
+        "php": ">= 7.3",
         "symfony/console": " ~3.4 | ~4.1",
         "symfony/filesystem": " ~3.4 | ~4.1",
-        "bluetree-service/data": "0.2.*"
+        "bluetree-service/data": "0.4.*",
+        "ext-simplexml": "*"
     },
     "require-dev": {
-        "satooshi/php-coveralls": "1.0.*",
-        "phpunit/phpunit": "4.8.35"
+        "php-coveralls/php-coveralls": "^2.5",
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {

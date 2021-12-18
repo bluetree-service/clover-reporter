@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace CloverReporter;
 
 use BlueData\Calculation\Math;
+use Symfony\Component\Filesystem\Filesystem;
 
 class Parser
 {
@@ -17,30 +20,28 @@ class Parser
     protected $options = [];
 
     /**
-     * Parser constructor.
-     *
      * @param string $file
      * @param array $options
      * @throws \InvalidArgumentException
      */
-    public function __construct($file, array $options)
+    public function __construct(string $file, array $options)
     {
         $this->options = $this->excludeDirs($options);
-        $filesystem = new \Symfony\Component\Filesystem\Filesystem;
-        $currentDir = getcwd() . '/';
+        $filesystem = new Filesystem();
+        $currentDir = \getcwd() . '/';
         $cloverFile = $currentDir . $file;
 
         if (!$filesystem->exists($cloverFile)) {
             throw new \InvalidArgumentException('File don\'t exists: ' . $cloverFile);
         }
 
-        $xml = @file_get_contents($cloverFile);
+        $xml = \file_get_contents($cloverFile);
 
         if (!$xml) {
             throw new \InvalidArgumentException('Unable to access file: ' . $cloverFile);
         }
 
-        $simpleXMLElement = simplexml_load_string($xml);
+        $simpleXMLElement = \simplexml_load_string($xml);
 
         $this->infoList = $this->processPackages($simpleXMLElement);
     }
@@ -49,12 +50,12 @@ class Parser
      * @param array $options
      * @return array
      */
-    protected function excludeDirs(array $options)
+    protected function excludeDirs(array $options): array
     {
         if (empty($options['skip-dir'])) {
             $options['skip-dir'] = [];
         } else {
-            $options['skip-dir'] = explode(';', $options['skip-dir']);
+            $options['skip-dir'] = \explode(';', $options['skip-dir']);
         }
 
         return $options;
@@ -63,7 +64,7 @@ class Parser
     /**
      * @return array
      */
-    public function getInfoList()
+    public function getInfoList(): array
     {
         return $this->infoList;
     }
@@ -72,11 +73,9 @@ class Parser
      * @param \SimpleXMLElement $xml
      * @return array
      */
-    protected function processPackages(\SimpleXMLElement $xml)
+    protected function processPackages(\SimpleXMLElement $xml): array
     {
-        $list = [
-            'files' => []
-        ];
+        $list = ['files' => []];
         $key = 0;
 
         if (isset($xml->project->package)) {
@@ -97,7 +96,7 @@ class Parser
      * @param array $list
      * @return array
      */
-    public function processFile(\SimpleXMLElement $package, &$key, array $list)
+    public function processFile(\SimpleXMLElement $package, int &$key, array $list): array
     {
         if (isset($package->file)) {
             /** @var \SimpleXMLElement $file */
@@ -120,9 +119,10 @@ class Parser
 
                 $list = $this->processLine($file, $key, $list);
 
-                $key ++;
+                $key++;
             }
         }
+
         return $list;
     }
 
@@ -130,14 +130,14 @@ class Parser
      * @param string $filePath
      * @return bool
      */
-    protected function checkDir($filePath)
+    protected function checkDir(string $filePath): bool
     {
         if (empty($this->options['skip-dir'])) {
             return false;
         }
 
         foreach ($this->options['skip-dir'] as $dir) {
-            if (preg_match("#$dir#", $filePath)) {
+            if (\preg_match("#$dir#", $filePath)) {
                 return true;
             }
         }
@@ -151,7 +151,7 @@ class Parser
      * @param array $list
      * @return array
      */
-    protected function processLine(\SimpleXMLElement $file, $key, array $list)
+    protected function processLine(\SimpleXMLElement $file, int $key, array $list): array
     {
         if (isset($file->line) && !$this->options['show-coverage']) {
             /** @var \SimpleXMLElement $line */
@@ -167,9 +167,9 @@ class Parser
     /**
      * @param int $all
      * @param int $percent
-     * @return int
+     * @return float
      */
-    protected function calculatePercent($all, $percent)
+    protected function calculatePercent(int $all, int $percent): float
     {
         return Math::numberToPercent($percent, $all) ?: 0;
     }
