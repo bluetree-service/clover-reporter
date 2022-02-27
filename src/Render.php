@@ -170,7 +170,6 @@ class Render
      */
     public function summary(float $startTime): self
     {
-        //@todo count warnings, errors & ok
         $sum = 0;
         $count = 0;
         $coverVal = 0;

@@ -17,13 +17,7 @@ class CommandsTest extends TestCase
         $this->copyFixedReports('clover_100_percent.xml');
     }
 
-    public function testIncorrectReportFile(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->prepareCommand();
-    }
-
-    public function testBasicExecute()
+    public function testBasicExecute(): void
     {
         $commandTester = $this->prepareCommand([
             'report_file' => $this->reportPaths['fix'] . 'clover_log.xml',
@@ -46,7 +40,7 @@ EOT;
         );
     }
 
-    public function testShowCoverageExecute()
+    public function testShowCoverageExecute(): void
     {
         $commandTester = $this->prepareCommand([
             'report_file' => $this->reportPaths['fix'] . 'clover_log.xml',
@@ -75,7 +69,7 @@ EOT;
         );
     }
 
-    public function testShowShortReportExecute()
+    public function testShowShortReportExecute(): void
     {
         $commandTester = $this->prepareCommand([
             'report_file' => $this->reportPaths['fix'] . 'clover_log.xml',
@@ -118,7 +112,7 @@ EOT;
         );
     }
 
-    public function testShowShortReportExecuteWithErrors()
+    public function testShowShortReportExecuteWithErrors(): void
     {
         $commandTester = $this->prepareCommand([
             'report_file' => $this->reportPaths['base'] . 'clover_log.xml',
@@ -154,7 +148,7 @@ EOT;
         );
     }
 
-    public function testFullReport()
+    public function testFullReport(): void
     {
         $commandTester = $this->prepareCommand([
             'report_file' => $this->reportPaths['fix'] . 'clover_log.xml',
@@ -468,7 +462,7 @@ EOT;
         );
     }
 
-    public function testFullCovered()
+    public function testFullCovered(): void
     {
         $commandTester = $this->prepareCommand([
             'report_file' => $this->reportPaths['fix'] . 'clover_100_percent.xml',
@@ -501,7 +495,7 @@ EOT;
      * @param string $report
      * @return string
      */
-    protected function clearExecutionTime($report)
+    protected function clearExecutionTime(string $report): string
     {
         return \substr($report, 0, \strrpos($report, "\n[Execution"));
     }
@@ -510,7 +504,7 @@ EOT;
      * @param string $report
      * @return string
      */
-    protected function clearSpaces($report)
+    protected function clearSpaces(string $report): string
     {
         return \preg_replace('#[ ]+\n#', "\n", $report);
     }
@@ -519,7 +513,7 @@ EOT;
      * @param array $parameters
      * @return CommandTester
      */
-    protected function prepareCommand(array $parameters = [])
+    protected function prepareCommand(array $parameters = []): CommandTester
     {
         $application = new Application();
 

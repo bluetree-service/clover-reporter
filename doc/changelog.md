@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.2.0.1 - 2022-02-27
+### Added
+* Support of php 8.1
+### Removed
+* Unused tests
+* Some comments from scripts
+
 ## 0.2.0.0 - 2021-12-18
 ### Added
 * New php versions support 7.3, 7.4, 8.0
