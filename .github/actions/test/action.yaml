@@ -1,5 +1,5 @@
-name: 'Deploy with Podman'
-description: 'Deploy application using Podman with required secrets and variables'
+name: 'Build and Test'
+description: 'Build and test on multiple PHP versions'
 
 inputs:
   php_version:
@@ -22,6 +22,6 @@ runs:
         make build php_version=${{ inputs.php_version }} container_mode=1
         make test php_version=${{ inputs.php_version }} container_mode=1
         if [ "${{ inputs.coverage }}" = "1" ]; then
-          make coverage php_version=${{ inputs.php_version }} container_mode=1
+          make coverage-status php_version=${{ inputs.php_version }} container_mode=1
         fi
         make down php_version=${{ inputs.php_version }}

@@ -17,6 +17,7 @@ All notable changes to this project will be documented in this file.
 * Fixed display when in line are Symfony Style markdowns
 ### Removed
 * php-coveralls
+* Some unused configs and classes
 
 ## 0.2.0.1 - 2022-02-27
 ### Added
