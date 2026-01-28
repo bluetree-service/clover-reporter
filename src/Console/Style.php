@@ -8,20 +8,21 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Helper\FormatterHelper;
 
 use function mb_strlen;
 
 class Style extends SymfonyStyle
 {
     /**
-     * @var \Symfony\Component\Console\Helper\FormatterHelper
+     * @var FormatterHelper
      */
-    protected $formatter;
+    protected FormatterHelper $formatter;
 
     /**
      * @var int
      */
-    protected $align = 20;
+    protected int $align = 20;
 
     /**
      * Style constructor.
@@ -77,13 +78,13 @@ class Style extends SymfonyStyle
     }
 
     /**
-     * @param string|array $messages
+     * @param string|iterable $messages
      * @param string $style
      * @param bool $large
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function formatBlock($messages, string $style, bool $large = false): self
+    public function formatBlock(string|iterable $messages, string $style, bool $large = false): self
     {
         $this->writeln(
             $this->formatter->formatBlock(
@@ -97,14 +98,14 @@ class Style extends SymfonyStyle
     }
 
     /**
-     * @param array $message
+     * @param string|iterable $message
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function errorLine(array $message): self
+    public function errorLine(string|iterable $message): self
     {
         $this->writeln(
-            $this->formatBlock($message, 'error')
+            $this->formatter->formatBlock($message, 'error', false)
         );
 
         return $this;
@@ -128,11 +129,11 @@ class Style extends SymfonyStyle
     }
 
     /**
-     * @param mixed $message
+     * @param string|iterable $message
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function okMessage($message): self
+    public function okMessage(string|iterable $message): self
     {
         $alignment = $this->align(4, $this->align);
         $this->write('<info>[OK]</info>');
@@ -143,11 +144,11 @@ class Style extends SymfonyStyle
     }
 
     /**
-     * @param mixed $message
+     * @param string|iterable $message
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function errorMessage($message): self
+    public function errorMessage(string|iterable $message): self
     {
         $alignment = $this->align(7, $this->align);
         $this->write('<fg=red>[ERROR]</>');
@@ -158,11 +159,11 @@ class Style extends SymfonyStyle
     }
 
     /**
-     * @param mixed $message
+     * @param string|iterable $message
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function warningMessage($message): self
+    public function warningMessage(string|iterable $message): self
     {
         $alignment = $this->align(9, $this->align);
         $this->write('<comment>[WARNING]</comment>');
@@ -173,73 +174,74 @@ class Style extends SymfonyStyle
     }
 
     /**
-     * @param string $message
-     * @return $this
+     * @param array|string $message
      * @throws \InvalidArgumentException
      */
-    public function note($message): self
+    public function note(array|string $message): void
     {
-        return $this->genericBlock($message, 'blue', 'note');
+        $this->genericBlock($message, 'blue', 'note');
     }
 
     /**
-     * @param string $message
-     * @return $this
+     * @param array|string $message
      * @throws \InvalidArgumentException
      */
-    public function caution($message): self
+    public function caution(array|string $message): void
     {
-        return $this->genericBlock($message, 'magenta', 'caution');
+        $this->genericBlock($message, 'magenta', 'caution');
     }
 
     /**
-     * @param string $message
-     * @return $this
+     * @param array|string $message
      * @throws \InvalidArgumentException
      */
-    public function success($message): self
+    public function success(array|string $message): void
     {
-        return $this->genericBlock($message, 'green', 'success');
+        $this->genericBlock($message, 'green', 'success');
     }
 
     /**
-     * @param string $message
-     * @return $this
+     * @param array|string $message
      * @throws \InvalidArgumentException
      */
-    public function warning($message): self
+    public function warning(array|string $message): void
     {
-        return $this->genericBlock($message, 'yellow', 'warning');
+        $this->genericBlock($message, 'yellow', 'warning');
     }
 
     /**
-     * @param string $message
-     * @return $this
+     * @param array|string $message
      * @throws \InvalidArgumentException
      */
-    public function error($message): self
+    public function error(array|string $message): void
     {
-        return $this->genericBlock($message, 'red', 'error');
+        $this->genericBlock($message, 'red', 'error');
     }
 
     /**
-     * @param string $message
+     * @param array|string $message
      * @param string $background
      * @param string $type
      * @param int $length
      * @return $this
      * @throws \InvalidArgumentException
      */
-    public function genericBlock(string $message, string $background, string $type, int $length = 100): self
+    public function genericBlock(array|string $message, string $background, string $type, int $length = 100): self
     {
-        $type = \strtoupper($type);
-        $alignment = $this->align(0, $length);
-        $alignmentMessage = $this->align(mb_strlen($message), $length - (mb_strlen($type) + 5));
+        if (\is_string($message)) {
+            $message = [$message];
+        }
 
-        $this->writeln("<bg=$background>$alignment</>");
-        $this->writeln("<fg=white;bg=$background>  [$type] $message$alignmentMessage</>");
-        $this->writeln("<bg=$background>$alignment</>");
-        $this->newLine();
+        foreach ($message as $msg) {
+            $type = \strtoupper($type);
+            $alignment = $this->align(0, $length);
+            $alignmentMessage = $this->align(mb_strlen($msg), $length - (mb_strlen($type) + 5));
+
+            $this->writeln("<bg=$background>$alignment</>");
+            $this->writeln("<fg=white;bg=$background>  [$type] $msg$alignmentMessage</>");
+            $this->writeln("<bg=$background>$alignment</>");
+            $this->newLine();
+        }
 
         return $this;
     }
@@ -253,6 +255,8 @@ class Style extends SymfonyStyle
      */
     public function formatUncoveredLine(int $lineNumber, string $line, string $coverage = ''): self
     {
+        $line = $this->escapeSymfonyMarkdowns($line);
+
         $endAlign = $this->align(mb_strlen($line), 120);
         $this->writeln(
             "     <comment>$lineNumber</comment>:"
@@ -262,6 +266,19 @@ class Style extends SymfonyStyle
         );
 
         return $this;
+    }
+
+    /**
+     * @param string $line
+     * @return string
+     */
+    protected function escapeSymfonyMarkdowns(string $line): string
+    {
+        if (\str_contains($line, '<') && (\str_contains($line, '/>') || \str_contains($line, '</>'))) {
+            $line = \str_replace(['<'], ['﹤'], $line);
+        }
+
+        return $line;
     }
 
     /**
@@ -292,8 +309,10 @@ class Style extends SymfonyStyle
      * @throws \InvalidArgumentException
      * @return $this
      */
-    public function formatCoveredLine(int $lineNumber, $lineCoverage, string $line): self
+    public function formatCoveredLine(int $lineNumber, int|string $lineCoverage, string $line): self
     {
+        $line = $this->escapeSymfonyMarkdowns($line);
+
         $lineColor = 'info';
         if ($lineCoverage === '-') {
             $lineColor = 'comment';
@@ -316,15 +335,10 @@ class Style extends SymfonyStyle
      */
     public function formatCoveragePercent(float $coverage): string
     {
-        switch (true) {
-            case $coverage < 40:
-                return "<fg=red>$coverage</>";
-
-            case $coverage < 90:
-                return "<comment>$coverage</comment>";
-
-            default:
-                return "<info>$coverage</info>";
-        }
+        return match (true) {
+            $coverage < 40 => "<fg=red>$coverage</>",
+            $coverage < 90 => "<comment>$coverage</comment>",
+            default => "<info>$coverage</info>",
+        };
     }
 }

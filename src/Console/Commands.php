@@ -50,9 +50,9 @@ class Commands extends Command
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
-     * @throws \InvalidArgumentException
+     * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $startTime = \microtime(true);
         $style = new Style($input, $output, $this);
@@ -94,5 +94,7 @@ class Commands extends Command
         }
 
         $render->summary($startTime);
+
+        return Command::SUCCESS;
     }
 }

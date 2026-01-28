@@ -1,0 +1,80 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - develop
+
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  test-php-82:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: ./.github/actions/test
+        with:
+          php_version: '82'
+
+  test-php-83:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: ./.github/actions/test
+        with:
+          php_version: '83'
+
+  test-php-84:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: ./.github/actions/test
+        with:
+          php_version: '84'
+
+  test-php-85:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: ./.github/actions/test
+        with:
+          php_version: '85'
+
+  coverage:
+    runs-on: ubuntu-latest
+    needs:
+      - test-php-82
+      - test-php-83
+      - test-php-84
+      - test-php-85
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Run coverage action
+        uses: ./.github/actions/test
+        with:
+          php_version: '85'
+          coverage: '1'
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v7
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

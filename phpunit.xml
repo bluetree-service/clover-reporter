@@ -5,12 +5,9 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
+    <source>
+        <include>
             <directory suffix=".php">src</directory>
-        </whitelist>
-        <blacklist>
-            <directory suffix=".php">tests/CoverageClasses</directory>
-        </blacklist>
-    </filter>
+        </include>
+    </source>
 </phpunit>

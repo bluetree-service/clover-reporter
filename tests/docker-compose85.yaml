@@ -1,0 +1,15 @@
+services:
+  php85:
+    image: chajr/php85-dev
+    networks:
+      - backend85
+    volumes:
+      - ../build:/var/www/html/build
+      - ${MOUNT_POINT}
+    command: ${RUN_COMMAND}
+    environment:
+      - MEMCACHED_SERVERS=memcached85
+
+networks:
+  backend85:
+    driver: bridge

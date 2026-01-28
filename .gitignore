@@ -2,3 +2,4 @@ vendor
 build
 tests/reports/fixed/*.xml
 composer.lock
+.phpunit.result.cache

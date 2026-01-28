@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  php:
+    image: php:7.4-cli
+    container_name: clover
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - ../class2/cache:/var/www/html
+    command: [ "tail", "-f", "/dev/null" ]
+    
+#    
+#    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+#    php composer-setup.php --2.2
+#    php -r "unlink('composer-setup.php');"
+#    mv composer.phar /usr/local/bin/composer
+#    composer --version

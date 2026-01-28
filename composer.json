@@ -4,6 +4,7 @@
     "license": "Apache-2.0",
     "description": "Clover report generator.",
     "keywords": [],
+    "version": "0.2.0.0",
     "homepage": "https://github.com/bluetree-service/clover-reporter",
     "authors": [
         {
@@ -14,15 +15,14 @@
         }
     ],
     "require": {
-        "php": ">= 7.3",
-        "symfony/console": " ~3.4 | ~4.1",
-        "symfony/filesystem": " ~3.4 | ~4.1",
+        "php": ">= 8.2",
+        "symfony/filesystem": "^7.4",
         "bluetree-service/data": "0.4.*",
-        "ext-simplexml": "*"
+        "ext-simplexml": "*",
+        "symfony/console": "^7.4"
     },
     "require-dev": {
-        "php-coveralls/php-coveralls": "^2.5",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^11.5"
     },
     "autoload": {
         "psr-4": {
@@ -36,5 +36,13 @@
     },
     "bin": [
         "bin/clover_reporter"
-    ]
+    ],
+    "scripts": {
+        "test": "./vendor/bin/phpunit --display-warnings",
+        "coverage": "./vendor/bin/phpunit --display-warnings --coverage-clover build/logs/clover.xml",
+        "clover-report": "./bin/clover_reporter -c build/logs/clover.xml ./",
+        "test-complete": [
+            "@coverage"
+        ]
+    }
 }

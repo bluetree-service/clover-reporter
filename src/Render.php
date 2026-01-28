@@ -12,22 +12,22 @@ class Render
     /**
      * @var array
      */
-    protected $infoList;
+    protected array $infoList;
 
     /**
      * @var array
      */
-    protected $options;
+    protected array $options;
 
     /**
      * @var Style
      */
-    protected $style;
+    protected Style $style;
 
     /**
      * @var string
      */
-    public $beerSymbol = "\xF0\x9F\x8D\xBA";
+    public string $beerSymbol = "\xF0\x9F\x8D\xBA";
 
     /**
      * Render constructor.

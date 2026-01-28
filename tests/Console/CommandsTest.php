@@ -517,7 +517,7 @@ EOT;
     {
         $application = new Application();
 
-        $application->add(new Commands());
+        $application->addCommand(new Commands());
 
         $command = $application->find('reporter');
 

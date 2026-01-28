@@ -12,12 +12,12 @@ class Parser
     /**
      * @var array
      */
-    protected $infoList = [];
+    protected array $infoList = [];
 
     /**
      * @var array
      */
-    protected $options = [];
+    protected array $options = [];
 
     /**
      * @param string $file
@@ -28,8 +28,7 @@ class Parser
     {
         $this->options = $this->excludeDirs($options);
         $filesystem = new Filesystem();
-        $currentDir = \getcwd() . '/';
-        $cloverFile = $currentDir . $file;
+        $cloverFile = $file;
 
         if (!$filesystem->exists($cloverFile)) {
             throw new \InvalidArgumentException('File don\'t exists: ' . $cloverFile);
@@ -157,7 +156,7 @@ class Parser
             /** @var \SimpleXMLElement $line */
             foreach ($file->line as $line) {
                 $attr = $line->attributes();
-                $list['files'][$key]['info'][$attr['num']->__toString()] = $attr['count']->__toString();
+                $list['files'][$key]['info'][$attr['num']->__toString() ?? ''] = $attr['count']->__toString() ?? '';
             }
         }
 
