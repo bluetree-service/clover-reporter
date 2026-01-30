@@ -1,26 +1,24 @@
 Bluetree Service Clover Reporter
 ============
 
-[![Latest Stable Version](https://poser.pugx.org/bluetree-service/clover-reporter/v/stable.svg)](https://packagist.org/packages/bluetree-service/clover-reporter)
-[![Total Downloads](https://poser.pugx.org/bluetree-service/clover-reporter/downloads.svg)](https://packagist.org/packages/bluetree-service/clover-reporter)
-[![License](https://poser.pugx.org/bluetree-service/clover-reporter/license.svg)](https://packagist.org/packages/bluetree-service/clover-reporter)
-[![Dependency Status](https://www.versioneye.com/user/projects/5a8db6560fb24f45b85068bb/badge.svg?style=flat-square)](https://www.versioneye.com/user/projects/5a8db6560fb24f45b85068bb)
+[![Latest Stable Version](https://poser.pugx.org/bluetree-service/clover-reporter/v/stable.svg?style=flat-square)](https://packagist.org/packages/bluetree-service/clover-reporter)
+[![Total Downloads](https://poser.pugx.org/bluetree-service/clover-reporter/downloads.svg?style=flat-square)](https://packagist.org/packages/bluetree-service/clover-reporter)
+[![License](https://poser.pugx.org/bluetree-service/clover-reporter/license.svg?style=flat-square)](https://packagist.org/packages/bluetree-service/clover-reporter)
 
-##### Builds
-| Travis | Scrutinizer |
-|:---:|:---:|
-| [![Build Status](https://app.travis-ci.org/bluetree-service/clover-reporter.svg)](https://app.travis-ci.com/github/bluetree-service/clover-reporter) | [![Build Status](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/build-status/master) |
+[![Build Status](https://travis-ci.org/bluetree-service/clover-reporter.svg?style=flat-square)](https://travis-ci.org/bluetree-service/clover-reporter)
+[![Coverage Status](https://coveralls.io/repos/github/bluetree-service/clover-reporter/badge.svg?style=flat-square&branch=master)](https://coveralls.io/github/bluetree-service/clover-reporter?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/build.png?style=flat-square&b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/build-status/master)
+[![Code Coverage](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/coverage.png?style=flat-square&b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/?branch=master)
 
-##### Coverage
-| Coveralls | Scrutinizer |
-|:---:|:---:|
-| [![Coverage Status](https://coveralls.io/repos/github/bluetree-service/clover-reporter/badge.svg?branch=master)](https://coveralls.io/github/bluetree-service/clover-reporter?branch=master) | [![Code Coverage](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/?branch=master) |
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=bluetree-service_clover-reporter&metric=bugs)](https://sonarcloud.io/summary/new_code?id=bluetree-service_clover-reporter)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=bluetree-service_clover-reporter&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=bluetree-service_clover-reporter)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=bluetree-service_clover-reporter&metric=coverage)](https://sonarcloud.io/summary/new_code?id=bluetree-service_clover-reporter)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bluetree-service_clover-reporter&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=bluetree-service_clover-reporter)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=bluetree-service_clover-reporter&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=bluetree-service_clover-reporter)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=bluetree-service_clover-reporter&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=bluetree-service_clover-reporter)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=bluetree-service_clover-reporter&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=bluetree-service_clover-reporter)
 
-##### Quality
-| Code Climate | SymfonyInsight |
-|:---:|:---:|
-| [![Code Climate](https://codeclimate.com/github/bluetree-service/clover-reporter/badges/gpa.svg)](https://codeclimate.com/github/bluetree-service/clover-reporter) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/?branch=master) | [![SymfonyInsight](https://insight.symfony.com/projects/fa301fd1-ad6e-401e-b660-62fc3612c9e3/mini.svg)](https://insight.symfony.com/projects/fa301fd1-ad6e-401e-b660-62fc3612c9e3) |
-|  | [![Code Intelligence Status](https://scrutinizer-ci.com/g/bluetree-service/clover-reporter/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence) |  |
+[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-dark.svg)](https://sonarcloud.io/summary/new_code?id=bluetree-service_clover-reporter)
 
 Documentation
 --------------
