@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            font-family: "DejaVu Sans Mono for Powerline", "Fira Code", "Source Code Pro", "Lucida Console", "Courier New", monospace;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #131419;
+            color: #f0f0f0;
+        }
+        h1, h2, h3 {
+            color: #f0f0f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            line-height: .3;
+            font-size: 14px;
+        }
+        table, th, td {
+            border: 1px solid #363842;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #1d2028;
+        }
+
+        tbody tr,
+        tbody tr *,
+        tbody td,
+        tbody th {
+            border: none;
+        }
+
+        .covered {
+            color: #4caf50;
+        }
+        .covered.excellent {
+            color: #4caf50;
+        }
+        .covered.good {
+            color: #b0cb70;
+        }
+        .covered.medium {
+            color: #fbc02d;
+        }
+        .covered.bad {
+            color: #ea7354;
+        }
+        .uncovered {
+            background-color: #980c00;
+            color: #d2bdbd;
+            font-weight: bold;
+        }
+        span.uncovered, .uncovered-class {
+            background-color: #131419;
+            color: #F42815;
+            font-weight: normal;
+        }
+        thead th.uncovered-class {
+            background-color: #1d2028;
+        }
+        .info {
+            color: #fbc02d;
+        }
+        .coverage tbody tr {
+            color: #fbc02d;
+        }
+        tbody tr td {
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+<h1>{{ title }}</h1>
+
+<h3>{{ report_file }}</h3>
+<p class="covered good">{{ log_file }}</p>
+
+<h2>{{ total_coverage }}</h2>
+<p class="{{ total_coverage_class }}">{{ total_coverage_percent }}%</p>
+
+<h2>{{ summary }}</h2>
+<table>
+    <thead>
+    <tr>
+        <th>{{ th_coverage }}</th>
+        <th>{{ th_class }}</th>
+        <th>{{ th_source_file }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in coverages %}
+        <tr>
+            <td class="{{ item.class }}">{{ item.percent }}%</td>
+            <td>{{ item.namespace }}</td>
+            <td>{{ item.path }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% if show_coverage == 1 %}
+<h2>{{ file_coverage }}</h2>
+
+{% for file in files %}
+<table class="coverage">
+    <thead>
+    <tr>
+        <th colspan="2">{{ file.path }}</th>
+    </tr>
+    <tr>
+        <th class="{{ file.class }}">{{ file.percent }}%</th>
+        <th>{{ file.namespace }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for line in file.lines %}
+        <tr>
+            <td class="info">{{ line.line }}:<span class="{{ line.class }}">{{ line.coverage }}</span>:</td>
+            <td class="{{ line.class }}">{{ line.content }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+
+<h2>{{ total_coverage }}</h2>
+<p class="{{ total_coverage_class }}">{{ total_coverage_percent }}%</p>
+
+<h2>{{ summary }}</h2>
+<table>
+    <thead>
+    <tr>
+        <th>{{ th_coverage }}</th>
+        <th>{{ th_class }}</th>
+        <th>{{ th_source_file }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in coverages %}
+        <tr>
+            <td class="{{ item.class }}">{{ item.percent }}%</td>
+            <td>{{ item.namespace }}</td>
+            <td>{{ item.path }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+<p>Execution time: {{ exec_time }} sec</p>
+<p>Memory used: {{ memory }}</p>
+</body>
+</html>

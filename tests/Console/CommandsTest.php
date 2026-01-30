@@ -56,9 +56,9 @@ Clover report generator.
 [Coverage report file] tests/reports/fixed/clover_log.xml
 
 Found 3 source files:
-  - 84.211%     SimpleLog\Log
-  - 100%        SimpleLog\LogStatic
-  - 0%          SimpleLog\Message\DefaultJsonMessage
+  - 84.211%     SimpleLog\Log                                                /var/www/html/tests/CoverageClasses/log/src/Log.php
+  - 100%        SimpleLog\LogStatic                                          /var/www/html/tests/CoverageClasses/log/src/LogStatic.php
+  - 0%          SimpleLog\Message\DefaultJsonMessage                         /var/www/html/tests/CoverageClasses/log/src/DefaultJsonMessage.php
 
 Total coverage: 61.404% 
 EOT;
@@ -85,14 +85,14 @@ Clover report generator.
 [Coverage report file] tests/reports/fixed/clover_log.xml
 
 Found 3 source files:
-  - 84.211%     SimpleLog\Log
+  - 84.211%     SimpleLog\Log                                                /var/www/html/tests/CoverageClasses/log/src/Log.php
      93:         {
      94:             if (\$this->defaultParams['storage'] instanceof StorageInterface) {
      107:        {
      108:            if (\$this->defaultParams['message'] instanceof MessageInterface) {
 
-  - 100%        SimpleLog\LogStatic
-  - 0%          SimpleLog\Message\DefaultJsonMessage
+  - 100%        SimpleLog\LogStatic                                          /var/www/html/tests/CoverageClasses/log/src/LogStatic.php
+  - 0%          SimpleLog\Message\DefaultJsonMessage                         /var/www/html/tests/CoverageClasses/log/src/DefaultJsonMessage.php
      18:          * @param string|array|object \$message
      21:          */
      26:             list(\$date, \$time) = explode(';', strftime(self::DATE_FORMAT . ';' . self::TIME_FORMAT, time()));
@@ -128,11 +128,11 @@ Clover report generator.
 [Coverage report file] tests/reports/clover_log.xml
 
 Found 3 source files:
-  - 84.211%     SimpleLog\\Log
+  - 84.211%     SimpleLog\\Log                                                {\$path}log/src/Log.php
 [ERROR]              File don't exists: {\$path}log/src/Log.php
-  - 100%        SimpleLog\\LogStatic
+  - 100%        SimpleLog\\LogStatic                                          {\$path}log/src/LogStatic.php
 [ERROR]              File don't exists: {\$path}log/src/LogStatic.php
-  - 0%          SimpleLog\\Message\\DefaultJsonMessage
+  - 0%          SimpleLog\\Message\\DefaultJsonMessage                         {\$path}log/src/DefaultJsonMessage.php
 [ERROR]              File don't exists: {\$path}log/src/DefaultJsonMessage.php
 
 Total coverage: 61.404% 
@@ -163,7 +163,7 @@ Clover report generator.
 
 [Coverage report file] tests/reports/fixed/clover_log.xml
 
-  - 84.211%     SimpleLog\\Log
+  - 84.211%     SimpleLog\\Log                                                /var/www/html/tests/CoverageClasses/log/src/Log.php
      0:-:      <?php
      1:-:
      2:-:      namespace SimpleLog;
@@ -318,7 +318,7 @@ Clover report generator.
      151:-:    }
      152:-:
 
-  - 100%        SimpleLog\\LogStatic
+  - 100%        SimpleLog\\LogStatic                                          /var/www/html/tests/CoverageClasses/log/src/LogStatic.php
      0:-:      <?php
      1:-:
      2:-:      namespace SimpleLog;
@@ -396,7 +396,7 @@ Clover report generator.
      74:-:     }
      75:2:
 
-  - 0%          SimpleLog\\Message\\DefaultJsonMessage
+  - 0%          SimpleLog\\Message\\DefaultJsonMessage                         /var/www/html/tests/CoverageClasses/log/src/DefaultJsonMessage.php
      0:-:      <?php
      1:-:
      2:-:      namespace SimpleLog\\Message;
@@ -478,9 +478,9 @@ Clover report generator.
 [Coverage report file] tests/reports/fixed/clover_100_percent.xml
 
 Found 3 source files:
-  - 100%        BlueEvent\\Event\\Base\\Event
-  - 100%        BlueEvent\\Event\\Base\\EventDispatcher
-  - 100%        BlueEvent\\Event\\Base\\EventLog
+  - 100%        BlueEvent\\Event\\Base\\Event                                   /var/www/html/tests/CoverageClasses/event/src/Event.php
+  - 100%        BlueEvent\\Event\\Base\\EventDispatcher                         /var/www/html/tests/CoverageClasses/event/src/EventDispatcher.php
+  - 100%        BlueEvent\\Event\\Base\\EventLog                                /var/www/html/tests/CoverageClasses/event/src/EventLog.php
 
 Total coverage: 100% 🍺🍺🍺
 EOT;
@@ -517,7 +517,7 @@ EOT;
     {
         $application = new Application();
 
-        $application->add(new Commands());
+        $application->addCommand(new Commands());
 
         $command = $application->find('reporter');
 

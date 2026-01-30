@@ -1,0 +1,27 @@
+name: 'Build and Test'
+description: 'Build and test on multiple PHP versions'
+
+inputs:
+  php_version:
+    description: 'PHP version'
+    required: true
+  coverage:
+    description: 'PHP version'
+    default: '0'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build and test for PHP ${{ inputs.php_version }}
+      shell: bash
+      run: |
+        make up daemon=1 php_version=${{ inputs.php_version }}
+        docker ps -a
+        docker network ls
+        make copy php_version=${{ inputs.php_version }}
+        make build php_version=${{ inputs.php_version }} container_mode=1
+        make test php_version=${{ inputs.php_version }} container_mode=1
+        if [ "${{ inputs.coverage }}" = "1" ]; then
+          make coverage-status php_version=${{ inputs.php_version }} container_mode=1
+        fi
+        make down php_version=${{ inputs.php_version }}

@@ -2,32 +2,32 @@
 
 declare(strict_types=1);
 
-namespace CloverReporter;
+namespace CloverReporter\Render;
 
 use CloverReporter\Console\Style;
 use Symfony\Component\Filesystem\Filesystem;
 
-class Render
+class RenderCli extends Common implements RenderInterface
 {
     /**
      * @var array
      */
-    protected $infoList;
+    protected array $infoList;
 
     /**
      * @var array
      */
-    protected $options;
+    protected array $options;
 
     /**
      * @var Style
      */
-    protected $style;
+    protected Style $style;
 
     /**
      * @var string
      */
-    public $beerSymbol = "\xF0\x9F\x8D\xBA";
+    public string $beerSymbol = "\xF0\x9F\x8D\xBA";
 
     /**
      * Render constructor.
@@ -55,7 +55,8 @@ class Render
         foreach ($this->infoList['files'] as $fileData) {
             $this->style->formatCoverage(
                 $fileData['percent'],
-                $fileData['package'] . '\\' . $fileData['namespace']
+                $fileData['namespace'],
+                $fileData['path']
             );
         }
 
@@ -130,11 +131,6 @@ class Render
         return $this;
     }
 
-    public function htmlReport(): self
-    {
-        return $this;
-    }
-
     /**
      * @param \Closure $lineProcessor
      * @throws \InvalidArgumentException
@@ -146,7 +142,8 @@ class Render
         foreach ($this->infoList['files'] as $fileData) {
             $this->style->formatCoverage(
                 $fileData['percent'],
-                $fileData['package'] . '\\' . $fileData['namespace']
+                $fileData['namespace'],
+                $fileData['path']
             );
 
             $path = $fileData['path'];
@@ -201,19 +198,5 @@ class Render
         );
 
         return $this;
-    }
-
-    /**
-     * @param int $bytes
-     * @return string
-     */
-    public function bytes(int $bytes): string
-    {
-        $format = '%01.2f %s';
-        $units = ['B', 'kB', 'MB', 'GB', 'TB', 'PB'];
-        $mod = 1000;
-        $power = ($bytes > 0) ? \floor(\log($bytes, $mod)) : 0;
-
-        return \sprintf($format, $bytes / ($mod ** $power), $units[$power]);
     }
 }

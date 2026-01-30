@@ -22,7 +22,7 @@ if (!defined('CLOVER_REPORTER_AUTOLOAD')) {
         STDERR,
         'You need to set up the project dependencies using Composer:'
         . PHP_EOL . PHP_EOL
-        . '    curl -s http://getcomposer.org/installer | php'
+        . '    curl -s https://getcomposer.org/installer | php'
         . PHP_EOL
         . '    composer install'
         . PHP_EOL . PHP_EOL
@@ -38,16 +38,26 @@ require CLOVER_REPORTER_AUTOLOAD;
 use Symfony\Component\Console\Application;
 use CloverReporter\Console\Commands;
 
-$composer = json_decode(
-    file_get_contents(__DIR__ . '/../composer.json')
-);
+try {
+    $composer = json_decode(
+        file_get_contents(__DIR__ . '/../composer.json'), false, 512, JSON_THROW_ON_ERROR
+    );
+} catch (JsonException $e) {
+    echo 'Error reading composer.json: ' . $e->getMessage();
+    exit(1);
+}
 
-$command = new Commands;
-$application = new Application;
-
-$application->setName($composer->description);
-$application->setVersion($composer->version);
-$application->add($command);
-$application->setDefaultCommand($command->getName(), true);
-
-$application->run();
+try {
+    $command = new Commands();
+    $application = new Application();
+    
+    $application->setName($composer->description);
+    $application->setVersion($composer->version);
+    $application->addCommand($command);
+    $application->setDefaultCommand($command->getName(), true);
+    
+    $application->run();
+} catch (Exception $e) {
+    echo 'Error: ' . $e->getMessage();
+    exit(1);
+}

@@ -1,0 +1,14 @@
+services:
+  php83:
+    image: chajr/php83-dev
+    networks:
+      - backend83
+    command: ${RUN_COMMAND}
+    environment:
+      - MEMCACHED_SERVERS=memcached83
+    volumes:
+      - ${MOUNT_POINT}
+
+networks:
+  backend83:
+    driver: bridge

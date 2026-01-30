@@ -1,0 +1,14 @@
+services:
+  php84:
+    image: chajr/php84-dev
+    networks:
+      - backend84
+    command: ${RUN_COMMAND}
+    environment:
+      - MEMCACHED_SERVERS=memcached84
+    volumes:
+      - ${MOUNT_POINT}
+
+networks:
+  backend84:
+    driver: bridge

@@ -3,7 +3,7 @@
   <project timestamp="1515765494">
     <package name="SimpleLog">
       <file name="{$path}log/src/Log.php">
-        <class name="Log" namespace="SimpleLog">
+        <class name="SimpleLog\Log" namespace="SimpleLog">
           <metrics methods="8" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="30" coveredstatements="26" elements="38" coveredelements="32"/>
         </class>
         <line num="45" type="method" name="__construct" crap="1" count="9"/>
@@ -53,7 +53,7 @@
         <metrics loc="8" ncloc="8" classes="1" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
       </file>
       <file name="{$path}log/src/LogStatic.php">
-        <class name="LogStatic" namespace="SimpleLog">
+        <class name="SimpleLog\LogStatic" namespace="SimpleLog">
           <metrics methods="5" coveredmethods="5" conditionals="0" coveredconditionals="0" statements="11" coveredstatements="11" elements="16" coveredelements="16"/>
         </class>
         <line num="21" type="method" name="log" crap="1" count="1"/>
@@ -80,7 +80,7 @@
     </file>
     <package name="SimpleLog\Message">
       <file name="{$path}log/src/DefaultJsonMessage.php">
-        <class name="DefaultJsonMessage" namespace="SimpleLog\Message">
+        <class name="SimpleLog\Message\DefaultJsonMessage" namespace="SimpleLog\Message">
           <metrics methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
         </class>
         <line num="18" type="method" name="createMessage" crap="2" count="0"/>
