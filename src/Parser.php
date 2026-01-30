@@ -43,6 +43,7 @@ class Parser
         $simpleXMLElement = \simplexml_load_string($xml);
 
         $this->infoList = $this->processPackages($simpleXMLElement);
+        $this->infoList['log_file'] = $file;
     }
 
     /**

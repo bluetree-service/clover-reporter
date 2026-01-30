@@ -105,7 +105,7 @@ class Style extends SymfonyStyle
     public function errorLine(string|iterable $message): self
     {
         $this->writeln(
-            $this->formatter->formatBlock($message, 'error', false)
+            $this->formatter->formatBlock($message, 'error')
         );
 
         return $this;
@@ -284,20 +284,23 @@ class Style extends SymfonyStyle
     /**
      * @param float $coverage
      * @param string $namespace
+     * @param string $path
      * @return $this
-     * @throws \InvalidArgumentException
      */
-    public function formatCoverage(float $coverage, string $namespace): self
+    public function formatCoverage(float $coverage, string $namespace, string $path): self
     {
         $coverage = \round($coverage, 3);
 
-        $align = $this->align(mb_strlen((string) $coverage), 10);
+        $alignCoverage = $this->align(mb_strlen((string) $coverage), 10);
+        $alignNamespace = $this->align(mb_strlen($namespace), 60);
 
         $this->write('  - ');
         $this->write($this->formatCoveragePercent($coverage));
         $this->write('%');
-        $this->write($align);
-        $this->writeln($namespace);
+        $this->write($alignCoverage);
+        $this->write($namespace);
+        $this->write($alignNamespace);
+        $this->writeln($path);
 
         return $this;
     }

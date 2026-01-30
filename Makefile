@@ -127,6 +127,10 @@ coverage-status: coverage
 	@$(call PRINT,$(BLUE)🧪 Coverage status...$(NC))
 	$(CONTAINER_MODE) composer clover-report
 
+coverage-status-full: coverage
+	@$(call PRINT,$(BLUE)🧪 Coverage status...$(NC))
+	$(CONTAINER_MODE) composer clover-report-full
+
 exec: init
 	@$(call PRINT,$(BLUE)💻 Connect with container...$(NC))
 	$(CONTAINER_MODE) bash

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Coverage Report</title>
+    <style>
+        body {
+            font-family: "DejaVu Sans Mono for Powerline", "Fira Code", "Source Code Pro", "Lucida Console", "Courier New", monospace;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #131419;
+            color: #f0f0f0;
+        }
+        h1, h2, h3 {
+            color: #f0f0f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            line-height: .3;
+            font-size: 14px;
+        }
+        table, th, td {
+            border: 1px solid #363842;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #1d2028;
+        }
+
+        tbody tr,
+        tbody tr *,
+        tbody td,
+        tbody th {
+            border: none;
+        }
+
+        .covered {
+            color: #4caf50;
+        }
+        .covered.excellent {
+            color: #4caf50;
+        }
+        .covered.good {
+            color: #b0cb70;
+        }
+        .covered.medium {
+            color: #fbc02d;
+        }
+        .covered.bad {
+            color: #ea7354;
+        }
+        .uncovered {
+            background-color: #980c00;
+            color: #d2bdbd;
+            font-weight: bold;
+        }
+        span.uncovered, .uncovered-class {
+            background-color: #131419;
+            color: #F42815;
+            font-weight: normal;
+        }
+        thead th.uncovered-class {
+            background-color: #1d2028;
+        }
+        .info {
+            color: #fbc02d;
+        }
+        .coverage tbody tr {
+            color: #fbc02d;
+        }
+        tbody tr td {
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+<h1>Code Coverage Report</h1>
+
+<h3>Coverage report file</h3>
+<p class="covered good">tests/reports/fixed/clover_log.xml</p>
+
+<h2>Total coverage</h2>
+<p class="covered good">61.404%</p>
+
+<h2>Summary</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Coverage</th>
+        <th>Class</th>
+        <th>Source File</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td class="covered excellent">84.211%</td>
+            <td>SimpleLog\Log</td>
+            <td>/var/www/html/tests/CoverageClasses/log/src/Log.php</td>
+        </tr>
+            <tr>
+            <td class="covered excellent">100%</td>
+            <td>SimpleLog\LogStatic</td>
+            <td>/var/www/html/tests/CoverageClasses/log/src/LogStatic.php</td>
+        </tr>
+            <tr>
+            <td class="uncovered-class">0%</td>
+            <td>SimpleLog\Message\DefaultJsonMessage</td>
+            <td>/var/www/html/tests/CoverageClasses/log/src/DefaultJsonMessage.php</td>
+        </tr>
+        </tbody>
+</table>
+
+
+
+</body>
+</html>

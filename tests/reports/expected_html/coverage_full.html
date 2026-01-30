@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Coverage Report</title>
+    <style>
+        body {
+            font-family: "DejaVu Sans Mono for Powerline", "Fira Code", "Source Code Pro", "Lucida Console", "Courier New", monospace;
+            margin: 20px;
+            line-height: 1.6;
+            background-color: #131419;
+            color: #f0f0f0;
+        }
+        h1, h2, h3 {
+            color: #f0f0f0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            line-height: .3;
+            font-size: 14px;
+        }
+        table, th, td {
+            border: 1px solid #363842;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #1d2028;
+        }
+
+        tbody tr,
+        tbody tr *,
+        tbody td,
+        tbody th {
+            border: none;
+        }
+
+        .covered {
+            color: #4caf50;
+        }
+        .covered.excellent {
+            color: #4caf50;
+        }
+        .covered.good {
+            color: #b0cb70;
+        }
+        .covered.medium {
+            color: #fbc02d;
+        }
+        .covered.bad {
+            color: #ea7354;
+        }
+        .uncovered {
+            background-color: #980c00;
+            color: #d2bdbd;
+            font-weight: bold;
+        }
+        span.uncovered, .uncovered-class {
+            background-color: #131419;
+            color: #F42815;
+            font-weight: normal;
+        }
+        thead th.uncovered-class {
+            background-color: #1d2028;
+        }
+        .info {
+            color: #fbc02d;
+        }
+        .coverage tbody tr {
+            color: #fbc02d;
+        }
+        tbody tr td {
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+<h1>Code Coverage Report</h1>
+
+<h3>Coverage report file</h3>
+<p class="covered good">tests/reports/fixed/clover_log.xml</p>
+
+<h2>Total coverage</h2>
+<p class="covered good">61.404%</p>
+
+<h2>Summary</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Coverage</th>
+        <th>Class</th>
+        <th>Source File</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td class="covered excellent">84.211%</td>
+            <td>SimpleLog\Log</td>
+            <td>/var/www/html/tests/CoverageClasses/log/src/Log.php</td>
+        </tr>
+            <tr>
+            <td class="covered excellent">100%</td>
+            <td>SimpleLog\LogStatic</td>
+            <td>/var/www/html/tests/CoverageClasses/log/src/LogStatic.php</td>
+        </tr>
+            <tr>
+            <td class="uncovered-class">0%</td>
+            <td>SimpleLog\Message\DefaultJsonMessage</td>
+            <td>/var/www/html/tests/CoverageClasses/log/src/DefaultJsonMessage.php</td>
+        </tr>
+        </tbody>
+</table>
+
+<h2>File coverage</h2>
+
+<table class="coverage">
+    <thead>
+    <tr>
+        <th colspan="2">/var/www/html/tests/CoverageClasses/log/src/Log.php</th>
+    </tr>
+    <tr>
+        <th class="covered excellent">84.211%</th>
+        <th>SimpleLog\Log</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td class="info">1:<span class="">-</span>:</td>
+            <td class="">&lt;?php</td>
+        </tr>
+            <tr>
+            <td class="info">2:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">3:<span class="">-</span>:</td>
+            <td class="">namespace SimpleLog;</td>
+        </tr>
+            <tr>
+            <td class="info">4:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">5:<span class="">-</span>:</td>
+            <td class="">use Psr\Log\LoggerInterface;</td>
+        </tr>
+            <tr>
+            <td class="info">6:<span class="">-</span>:</td>
+            <td class="">use Psr\Log\LoggerTrait;</td>
+        </tr>
+            <tr>
+            <td class="info">7:<span class="">-</span>:</td>
+            <td class="">use Psr\Log\LogLevel;</td>
+        </tr>
+            <tr>
+            <td class="info">8:<span class="">-</span>:</td>
+            <td class="">use Psr\Log\InvalidArgumentException;</td>
+        </tr>
+            <tr>
+            <td class="info">9:<span class="">-</span>:</td>
+            <td class="">use SimpleLog\Storage\StorageInterface;</td>
+        </tr>
+            <tr>
+            <td class="info">10:<span class="">-</span>:</td>
+            <td class="">use SimpleLog\Message\MessageInterface;</td>
+        </tr>
+            <tr>
+            <td class="info">11:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">12:<span class="">-</span>:</td>
+            <td class="">class Log implements LogInterface, LoggerInterface</td>
+        </tr>
+            <tr>
+            <td class="info">13:<span class="">-</span>:</td>
+            <td class="">{</td>
+        </tr>
+            <tr>
+            <td class="info">14:<span class="">-</span>:</td>
+            <td class="">    use LoggerTrait;</td>
+        </tr>
+            <tr>
+            <td class="info">15:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">16:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">17:<span class="">-</span>:</td>
+            <td class="">     * @var array</td>
+        </tr>
+            <tr>
+            <td class="info">18:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">19:<span class="">-</span>:</td>
+            <td class="">    protected $defaultParams = [</td>
+        </tr>
+            <tr>
+            <td class="info">20:<span class="">-</span>:</td>
+            <td class="">        &#039;log_path&#039; =&gt; &#039;./log&#039;,</td>
+        </tr>
+            <tr>
+            <td class="info">21:<span class="">-</span>:</td>
+            <td class="">        &#039;level&#039; =&gt; &#039;notice&#039;,</td>
+        </tr>
+            <tr>
+            <td class="info">22:<span class="">-</span>:</td>
+            <td class="">        &#039;storage&#039; =&gt; \SimpleLog\Storage\File::class,</td>
+        </tr>
+            <tr>
+            <td class="info">23:<span class="">-</span>:</td>
+            <td class="">        &#039;message&#039; =&gt; \SimpleLog\Message\DefaultMessage::class,</td>
+        </tr>
+            <tr>
+            <td class="info">24:<span class="">-</span>:</td>
+            <td class="">    ];</td>
+        </tr>
+            <tr>
+            <td class="info">25:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">26:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">27:<span class="">-</span>:</td>
+            <td class="">     * @var \SimpleLog\Storage\StorageInterface</td>
+        </tr>
+            <tr>
+            <td class="info">28:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">29:<span class="">-</span>:</td>
+            <td class="">    protected $storage;</td>
+        </tr>
+            <tr>
+            <td class="info">30:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">31:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">32:<span class="">-</span>:</td>
+            <td class="">     * @var array</td>
+        </tr>
+            <tr>
+            <td class="info">33:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">34:<span class="">-</span>:</td>
+            <td class="">    protected $levels = [];</td>
+        </tr>
+            <tr>
+            <td class="info">35:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">36:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">37:<span class="">-</span>:</td>
+            <td class="">     * @var \SimpleLog\Message\MessageInterface</td>
+        </tr>
+            <tr>
+            <td class="info">38:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">39:<span class="">-</span>:</td>
+            <td class="">    protected $message;</td>
+        </tr>
+            <tr>
+            <td class="info">40:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">41:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">42:<span class="">-</span>:</td>
+            <td class="">     * @param array $params</td>
+        </tr>
+            <tr>
+            <td class="info">43:<span class="">-</span>:</td>
+            <td class="">     * @throws \ReflectionException</td>
+        </tr>
+            <tr>
+            <td class="info">44:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">45:<span class="covered">9</span>:</td>
+            <td class="covered">    public function __construct(array $params = [])</td>
+        </tr>
+            <tr>
+            <td class="info">46:<span class="">-</span>:</td>
+            <td class="">    {</td>
+        </tr>
+            <tr>
+            <td class="info">47:<span class="covered">9</span>:</td>
+            <td class="covered">        $this-&gt;defaultParams = array_merge($this-&gt;defaultParams, $params);</td>
+        </tr>
+            <tr>
+            <td class="info">48:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">49:<span class="covered">9</span>:</td>
+            <td class="covered">        $levels = new \ReflectionClass(new LogLevel);</td>
+        </tr>
+            <tr>
+            <td class="info">50:<span class="covered">9</span>:</td>
+            <td class="covered">        $this-&gt;levels = $levels-&gt;getConstants();</td>
+        </tr>
+            <tr>
+            <td class="info">51:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">52:<span class="covered">9</span>:</td>
+            <td class="covered">        $this-&gt;reloadStorage();</td>
+        </tr>
+            <tr>
+            <td class="info">53:<span class="covered">9</span>:</td>
+            <td class="covered">        $this-&gt;reloadMessage();</td>
+        </tr>
+            <tr>
+            <td class="info">54:<span class="covered">9</span>:</td>
+            <td class="covered">    }</td>
+        </tr>
+            <tr>
+            <td class="info">55:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">56:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">57:<span class="">-</span>:</td>
+            <td class="">     * log event information into file</td>
+        </tr>
+            <tr>
+            <td class="info">58:<span class="">-</span>:</td>
+            <td class="">     *</td>
+        </tr>
+            <tr>
+            <td class="info">59:<span class="">-</span>:</td>
+            <td class="">     * @param array|string|object $message</td>
+        </tr>
+            <tr>
+            <td class="info">60:<span class="">-</span>:</td>
+            <td class="">     * @param array $context</td>
+        </tr>
+            <tr>
+            <td class="info">61:<span class="">-</span>:</td>
+            <td class="">     * @return $this</td>
+        </tr>
+            <tr>
+            <td class="info">62:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">63:<span class="covered">8</span>:</td>
+            <td class="covered">    public function makeLog($message, array $context = [])</td>
+        </tr>
+            <tr>
+            <td class="info">64:<span class="">-</span>:</td>
+            <td class="">    {</td>
+        </tr>
+            <tr>
+            <td class="info">65:<span class="covered">8</span>:</td>
+            <td class="covered">        $this-&gt;log($this-&gt;defaultParams[&#039;level&#039;], $message, $context);</td>
+        </tr>
+            <tr>
+            <td class="info">66:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">67:<span class="">-</span>:</td>
+            <td class="">        return $this;</td>
+        </tr>
+            <tr>
+            <td class="info">68:<span class="">-</span>:</td>
+            <td class="">    }</td>
+        </tr>
+            <tr>
+            <td class="info">69:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">70:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">71:<span class="">-</span>:</td>
+            <td class="">     * @param string $level</td>
+        </tr>
+            <tr>
+            <td class="info">72:<span class="">-</span>:</td>
+            <td class="">     * @param string|array|object $message</td>
+        </tr>
+            <tr>
+            <td class="info">73:<span class="">-</span>:</td>
+            <td class="">     * @param array $context</td>
+        </tr>
+            <tr>
+            <td class="info">74:<span class="covered">10</span>:</td>
+            <td class="covered">     * @throws \Psr\Log\InvalidArgumentException</td>
+        </tr>
+            <tr>
+            <td class="info">75:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">76:<span class="covered">10</span>:</td>
+            <td class="covered">    public function log($level, $message, array $context = [])</td>
+        </tr>
+            <tr>
+            <td class="info">77:<span class="covered">1</span>:</td>
+            <td class="covered">    {</td>
+        </tr>
+            <tr>
+            <td class="info">78:<span class="">-</span>:</td>
+            <td class="">        if (!in_array($level, $this-&gt;levels, true)) {</td>
+        </tr>
+            <tr>
+            <td class="info">79:<span class="">-</span>:</td>
+            <td class="">            throw new InvalidArgumentException(&#039;Level not defined: &#039; . $level);</td>
+        </tr>
+            <tr>
+            <td class="info">80:<span class="covered">9</span>:</td>
+            <td class="covered">        }</td>
+        </tr>
+            <tr>
+            <td class="info">81:<span class="covered">9</span>:</td>
+            <td class="covered"></td>
+        </tr>
+            <tr>
+            <td class="info">82:<span class="covered">8</span>:</td>
+            <td class="covered">        $newMessage = $this-&gt;message</td>
+        </tr>
+            <tr>
+            <td class="info">83:<span class="">-</span>:</td>
+            <td class="">            -&gt;createMessage($message, $context)</td>
+        </tr>
+            <tr>
+            <td class="info">84:<span class="covered">8</span>:</td>
+            <td class="covered">            -&gt;getMessage();</td>
+        </tr>
+            <tr>
+            <td class="info">85:<span class="covered">8</span>:</td>
+            <td class="covered"></td>
+        </tr>
+            <tr>
+            <td class="info">86:<span class="">-</span>:</td>
+            <td class="">        $this-&gt;storage-&gt;store($newMessage, $level);</td>
+        </tr>
+            <tr>
+            <td class="info">87:<span class="">-</span>:</td>
+            <td class="">    }</td>
+        </tr>
+            <tr>
+            <td class="info">88:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">89:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">90:<span class="covered">10</span>:</td>
+            <td class="covered">     * @return $this</td>
+        </tr>
+            <tr>
+            <td class="info">91:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">92:<span class="covered">10</span>:</td>
+            <td class="covered">    protected function reloadStorage()</td>
+        </tr>
+            <tr>
+            <td class="info">93:<span class="uncovered">0</span>:</td>
+            <td class="uncovered">    {</td>
+        </tr>
+            <tr>
+            <td class="info">94:<span class="uncovered">0</span>:</td>
+            <td class="uncovered">        if ($this-&gt;defaultParams[&#039;storage&#039;] instanceof StorageInterface) {</td>
+        </tr>
+            <tr>
+            <td class="info">95:<span class="">-</span>:</td>
+            <td class="">            $this-&gt;storage = $this-&gt;defaultParams[&#039;storage&#039;];</td>
+        </tr>
+            <tr>
+            <td class="info">96:<span class="">-</span>:</td>
+            <td class="">            return $this;</td>
+        </tr>
+            <tr>
+            <td class="info">97:<span class="covered">10</span>:</td>
+            <td class="covered">        }</td>
+        </tr>
+            <tr>
+            <td class="info">98:<span class="covered">10</span>:</td>
+            <td class="covered"></td>
+        </tr>
+            <tr>
+            <td class="info">99:<span class="">-</span>:</td>
+            <td class="">        $this-&gt;storage = new $this-&gt;defaultParams[&#039;storage&#039;]($this-&gt;defaultParams);</td>
+        </tr>
+            <tr>
+            <td class="info">100:<span class="">-</span>:</td>
+            <td class="">        return $this;</td>
+        </tr>
+            <tr>
+            <td class="info">101:<span class="">-</span>:</td>
+            <td class="">    }</td>
+        </tr>
+            <tr>
+            <td class="info">102:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">103:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">104:<span class="covered">9</span>:</td>
+            <td class="covered">     * @return $this</td>
+        </tr>
+            <tr>
+            <td class="info">105:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">106:<span class="covered">9</span>:</td>
+            <td class="covered">    protected function reloadMessage()</td>
+        </tr>
+            <tr>
+            <td class="info">107:<span class="uncovered">0</span>:</td>
+            <td class="uncovered">    {</td>
+        </tr>
+            <tr>
+            <td class="info">108:<span class="uncovered">0</span>:</td>
+            <td class="uncovered">        if ($this-&gt;defaultParams[&#039;message&#039;] instanceof MessageInterface) {</td>
+        </tr>
+            <tr>
+            <td class="info">109:<span class="">-</span>:</td>
+            <td class="">            $this-&gt;message = $this-&gt;defaultParams[&#039;message&#039;];</td>
+        </tr>
+            <tr>
+            <td class="info">110:<span class="">-</span>:</td>
+            <td class="">            return $this;</td>
+        </tr>
+            <tr>
+            <td class="info">111:<span class="covered">9</span>:</td>
+            <td class="covered">        }</td>
+        </tr>
+            <tr>
+            <td class="info">112:<span class="covered">9</span>:</td>
+            <td class="covered"></td>
+        </tr>
+            <tr>
+            <td class="info">113:<span class="">-</span>:</td>
+            <td class="">        $this-&gt;message = new $this-&gt;defaultParams[&#039;message&#039;]($this-&gt;defaultParams);</td>
+        </tr>
+            <tr>
+            <td class="info">114:<span class="">-</span>:</td>
+            <td class="">        return $this;</td>
+        </tr>
+            <tr>
+            <td class="info">115:<span class="">-</span>:</td>
+            <td class="">    }</td>
+        </tr>
+            <tr>
+            <td class="info">116:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">117:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">118:<span class="">-</span>:</td>
+            <td class="">     * set log option for all future executions of makeLog</td>
+        </tr>
+            <tr>
+            <td class="info">119:<span class="">-</span>:</td>
+            <td class="">     *</td>
+        </tr>
+            <tr>
+            <td class="info">120:<span class="">-</span>:</td>
+            <td class="">     * @param string $key</td>
+        </tr>
+            <tr>
+            <td class="info">121:<span class="">-</span>:</td>
+            <td class="">     * @param mixed $val</td>
+        </tr>
+            <tr>
+            <td class="info">122:<span class="covered">3</span>:</td>
+            <td class="covered">     * @return $this</td>
+        </tr>
+            <tr>
+            <td class="info">123:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">124:<span class="covered">3</span>:</td>
+            <td class="covered">    public function setOption($key, $val)</td>
+        </tr>
+            <tr>
+            <td class="info">125:<span class="covered">3</span>:</td>
+            <td class="covered">    {</td>
+        </tr>
+            <tr>
+            <td class="info">126:<span class="">-</span>:</td>
+            <td class="">        $this-&gt;defaultParams[$key] = $val;</td>
+        </tr>
+            <tr>
+            <td class="info">127:<span class="">-</span>:</td>
+            <td class="">        return $this-&gt;reloadStorage();</td>
+        </tr>
+            <tr>
+            <td class="info">128:<span class="">-</span>:</td>
+            <td class="">    }</td>
+        </tr>
+            <tr>
+            <td class="info">129:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">130:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">131:<span class="">-</span>:</td>
+            <td class="">     * return all configuration or only given key value</td>
+        </tr>
+            <tr>
+            <td class="info">132:<span class="">-</span>:</td>
+            <td class="">     *</td>
+        </tr>
+            <tr>
+            <td class="info">133:<span class="">-</span>:</td>
+            <td class="">     * @param null|string $key</td>
+        </tr>
+            <tr>
+            <td class="info">134:<span class="covered">3</span>:</td>
+            <td class="covered">     * @return array|mixed</td>
+        </tr>
+            <tr>
+            <td class="info">135:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">136:<span class="covered">3</span>:</td>
+            <td class="covered">    public function getOption($key = null)</td>
+        </tr>
+            <tr>
+            <td class="info">137:<span class="covered">1</span>:</td>
+            <td class="covered">    {</td>
+        </tr>
+            <tr>
+            <td class="info">138:<span class="">-</span>:</td>
+            <td class="">        if (is_null($key)) {</td>
+        </tr>
+            <tr>
+            <td class="info">139:<span class="">-</span>:</td>
+            <td class="">            return $this-&gt;defaultParams;</td>
+        </tr>
+            <tr>
+            <td class="info">140:<span class="covered">3</span>:</td>
+            <td class="covered">        }</td>
+        </tr>
+            <tr>
+            <td class="info">141:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">142:<span class="">-</span>:</td>
+            <td class="">        return $this-&gt;defaultParams[$key];</td>
+        </tr>
+            <tr>
+            <td class="info">143:<span class="">-</span>:</td>
+            <td class="">    }</td>
+        </tr>
+            <tr>
+            <td class="info">144:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">145:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">146:<span class="covered">1</span>:</td>
+            <td class="covered">     * @return string</td>
+        </tr>
+            <tr>
+            <td class="info">147:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">148:<span class="covered">1</span>:</td>
+            <td class="covered">    public function getLastMessage()</td>
+        </tr>
+            <tr>
+            <td class="info">149:<span class="">-</span>:</td>
+            <td class="">    {</td>
+        </tr>
+            <tr>
+            <td class="info">150:<span class="">-</span>:</td>
+            <td class="">        return $this-&gt;message-&gt;getMessage();</td>
+        </tr>
+            <tr>
+            <td class="info">151:<span class="">-</span>:</td>
+            <td class="">    }</td>
+        </tr>
+            <tr>
+            <td class="info">152:<span class="">-</span>:</td>
+            <td class="">}</td>
+        </tr>
+            <tr>
+            <td class="info">153:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+        </tbody>
+</table>
+<table class="coverage">
+    <thead>
+    <tr>
+        <th colspan="2">/var/www/html/tests/CoverageClasses/log/src/LogStatic.php</th>
+    </tr>
+    <tr>
+        <th class="covered excellent">100%</th>
+        <th>SimpleLog\LogStatic</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td class="info">1:<span class="">-</span>:</td>
+            <td class="">&lt;?php</td>
+        </tr>
+            <tr>
+            <td class="info">2:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">3:<span class="">-</span>:</td>
+            <td class="">namespace SimpleLog;</td>
+        </tr>
+            <tr>
+            <td class="info">4:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">5:<span class="">-</span>:</td>
+            <td class="">class LogStatic</td>
+        </tr>
+            <tr>
+            <td class="info">6:<span class="">-</span>:</td>
+            <td class="">{</td>
+        </tr>
+            <tr>
+            <td class="info">7:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">8:<span class="">-</span>:</td>
+            <td class="">     * @var Log</td>
+        </tr>
+            <tr>
+            <td class="info">9:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">10:<span class="">-</span>:</td>
+            <td class="">    protected static $instance;</td>
+        </tr>
+            <tr>
+            <td class="info">11:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">12:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">13:<span class="">-</span>:</td>
+            <td class="">     * log event information into file</td>
+        </tr>
+            <tr>
+            <td class="info">14:<span class="">-</span>:</td>
+            <td class="">     *</td>
+        </tr>
+            <tr>
+            <td class="info">15:<span class="">-</span>:</td>
+            <td class="">     * @param string $level</td>
+        </tr>
+            <tr>
+            <td class="info">16:<span class="">-</span>:</td>
+            <td class="">     * @param array|string $message</td>
+        </tr>
+            <tr>
+            <td class="info">17:<span class="">-</span>:</td>
+            <td class="">     * @param array $context</td>
+        </tr>
+            <tr>
+            <td class="info">18:<span class="">-</span>:</td>
+            <td class="">     * @param array $params</td>
+        </tr>
+            <tr>
+            <td class="info">19:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">20:<span class="">-</span>:</td>
+            <td class="">    public static function log($level, $message, array $context = [], array $params = [])</td>
+        </tr>
+            <tr>
+            <td class="info">21:<span class="covered">1</span>:</td>
+            <td class="covered">    {</td>
+        </tr>
+            <tr>
+            <td class="info">22:<span class="">-</span>:</td>
+            <td class="">        self::init($params);</td>
+        </tr>
+            <tr>
+            <td class="info">23:<span class="covered">1</span>:</td>
+            <td class="covered">        self::$instance-&gt;log($level, $message, $context);</td>
+        </tr>
+            <tr>
+            <td class="info">24:<span class="covered">1</span>:</td>
+            <td class="covered">    }</td>
+        </tr>
+            <tr>
+            <td class="info">25:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">26:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">27:<span class="">-</span>:</td>
+            <td class="">     * log event information into file</td>
+        </tr>
+            <tr>
+            <td class="info">28:<span class="">-</span>:</td>
+            <td class="">     *</td>
+        </tr>
+            <tr>
+            <td class="info">29:<span class="">-</span>:</td>
+            <td class="">     * @param array|string $message</td>
+        </tr>
+            <tr>
+            <td class="info">30:<span class="">-</span>:</td>
+            <td class="">     * @param array $context</td>
+        </tr>
+            <tr>
+            <td class="info">31:<span class="">-</span>:</td>
+            <td class="">     * @param array $params</td>
+        </tr>
+            <tr>
+            <td class="info">32:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">33:<span class="">-</span>:</td>
+            <td class="">    public static function makeLog($message, array $context = [], array $params = [])</td>
+        </tr>
+            <tr>
+            <td class="info">34:<span class="">-</span>:</td>
+            <td class="">    {</td>
+        </tr>
+            <tr>
+            <td class="info">35:<span class="covered">1</span>:</td>
+            <td class="covered">        self::init($params);</td>
+        </tr>
+            <tr>
+            <td class="info">36:<span class="">-</span>:</td>
+            <td class="">        self::$instance-&gt;makeLog($message, $context);</td>
+        </tr>
+            <tr>
+            <td class="info">37:<span class="covered">1</span>:</td>
+            <td class="covered">    }</td>
+        </tr>
+            <tr>
+            <td class="info">38:<span class="covered">1</span>:</td>
+            <td class="covered"></td>
+        </tr>
+            <tr>
+            <td class="info">39:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">40:<span class="">-</span>:</td>
+            <td class="">     * set log option for all future executions of makeLog</td>
+        </tr>
+            <tr>
+            <td class="info">41:<span class="">-</span>:</td>
+            <td class="">     *</td>
+        </tr>
+            <tr>
+            <td class="info">42:<span class="">-</span>:</td>
+            <td class="">     * @param string $key</td>
+        </tr>
+            <tr>
+            <td class="info">43:<span class="">-</span>:</td>
+            <td class="">     * @param mixed $val</td>
+        </tr>
+            <tr>
+            <td class="info">44:<span class="">-</span>:</td>
+            <td class="">     * @return Log</td>
+        </tr>
+            <tr>
+            <td class="info">45:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">46:<span class="">-</span>:</td>
+            <td class="">    public static function setOption($key, $val)</td>
+        </tr>
+            <tr>
+            <td class="info">47:<span class="">-</span>:</td>
+            <td class="">    {</td>
+        </tr>
+            <tr>
+            <td class="info">48:<span class="covered">2</span>:</td>
+            <td class="covered">        self::init();</td>
+        </tr>
+            <tr>
+            <td class="info">49:<span class="">-</span>:</td>
+            <td class="">        return self::$instance-&gt;setOption($key, $val);</td>
+        </tr>
+            <tr>
+            <td class="info">50:<span class="covered">2</span>:</td>
+            <td class="covered">    }</td>
+        </tr>
+            <tr>
+            <td class="info">51:<span class="covered">2</span>:</td>
+            <td class="covered"></td>
+        </tr>
+            <tr>
+            <td class="info">52:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">53:<span class="">-</span>:</td>
+            <td class="">     * return all configuration or only given key value</td>
+        </tr>
+            <tr>
+            <td class="info">54:<span class="">-</span>:</td>
+            <td class="">     *</td>
+        </tr>
+            <tr>
+            <td class="info">55:<span class="">-</span>:</td>
+            <td class="">     * @param null|string $key</td>
+        </tr>
+            <tr>
+            <td class="info">56:<span class="">-</span>:</td>
+            <td class="">     * @return array|mixed</td>
+        </tr>
+            <tr>
+            <td class="info">57:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">58:<span class="">-</span>:</td>
+            <td class="">    public static function getOption($key = null)</td>
+        </tr>
+            <tr>
+            <td class="info">59:<span class="">-</span>:</td>
+            <td class="">    {</td>
+        </tr>
+            <tr>
+            <td class="info">60:<span class="covered">2</span>:</td>
+            <td class="covered">        self::init();</td>
+        </tr>
+            <tr>
+            <td class="info">61:<span class="">-</span>:</td>
+            <td class="">        return self::$instance-&gt;getOption($key);</td>
+        </tr>
+            <tr>
+            <td class="info">62:<span class="covered">2</span>:</td>
+            <td class="covered">    }</td>
+        </tr>
+            <tr>
+            <td class="info">63:<span class="covered">2</span>:</td>
+            <td class="covered"></td>
+        </tr>
+            <tr>
+            <td class="info">64:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">65:<span class="">-</span>:</td>
+            <td class="">     * create Log object if not exists</td>
+        </tr>
+            <tr>
+            <td class="info">66:<span class="">-</span>:</td>
+            <td class="">     *</td>
+        </tr>
+            <tr>
+            <td class="info">67:<span class="">-</span>:</td>
+            <td class="">     * @param array $params</td>
+        </tr>
+            <tr>
+            <td class="info">68:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">69:<span class="">-</span>:</td>
+            <td class="">    protected static function init(array $params = [])</td>
+        </tr>
+            <tr>
+            <td class="info">70:<span class="">-</span>:</td>
+            <td class="">    {</td>
+        </tr>
+            <tr>
+            <td class="info">71:<span class="covered">2</span>:</td>
+            <td class="covered">        if (is_null(self::$instance)) {</td>
+        </tr>
+            <tr>
+            <td class="info">72:<span class="">-</span>:</td>
+            <td class="">            self::$instance = new Log($params);</td>
+        </tr>
+            <tr>
+            <td class="info">73:<span class="covered">2</span>:</td>
+            <td class="covered">        }</td>
+        </tr>
+            <tr>
+            <td class="info">74:<span class="covered">1</span>:</td>
+            <td class="covered">    }</td>
+        </tr>
+            <tr>
+            <td class="info">75:<span class="">-</span>:</td>
+            <td class="">}</td>
+        </tr>
+            <tr>
+            <td class="info">76:<span class="covered">2</span>:</td>
+            <td class="covered"></td>
+        </tr>
+        </tbody>
+</table>
+<table class="coverage">
+    <thead>
+    <tr>
+        <th colspan="2">/var/www/html/tests/CoverageClasses/log/src/DefaultJsonMessage.php</th>
+    </tr>
+    <tr>
+        <th class="uncovered-class">0%</th>
+        <th>SimpleLog\Message\DefaultJsonMessage</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td class="info">1:<span class="">-</span>:</td>
+            <td class="">&lt;?php</td>
+        </tr>
+            <tr>
+            <td class="info">2:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">3:<span class="">-</span>:</td>
+            <td class="">namespace SimpleLog\Message;</td>
+        </tr>
+            <tr>
+            <td class="info">4:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">5:<span class="">-</span>:</td>
+            <td class="">class DefaultJsonMessage extends DefaultMessage</td>
+        </tr>
+            <tr>
+            <td class="info">6:<span class="">-</span>:</td>
+            <td class="">{</td>
+        </tr>
+            <tr>
+            <td class="info">7:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">8:<span class="">-</span>:</td>
+            <td class="">     * @var array</td>
+        </tr>
+            <tr>
+            <td class="info">9:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">10:<span class="">-</span>:</td>
+            <td class="">    protected $messageScheme = [];</td>
+        </tr>
+            <tr>
+            <td class="info">11:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">12:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">13:<span class="">-</span>:</td>
+            <td class="">     * @var array</td>
+        </tr>
+            <tr>
+            <td class="info">14:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">15:<span class="">-</span>:</td>
+            <td class="">    protected $context = [];</td>
+        </tr>
+            <tr>
+            <td class="info">16:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">17:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">18:<span class="uncovered">0</span>:</td>
+            <td class="uncovered">     * @param string|array|object $message</td>
+        </tr>
+            <tr>
+            <td class="info">19:<span class="">-</span>:</td>
+            <td class="">     * @param array $context</td>
+        </tr>
+            <tr>
+            <td class="info">20:<span class="">-</span>:</td>
+            <td class="">     * @return $this</td>
+        </tr>
+            <tr>
+            <td class="info">21:<span class="uncovered">0</span>:</td>
+            <td class="uncovered">     */</td>
+        </tr>
+            <tr>
+            <td class="info">22:<span class="">-</span>:</td>
+            <td class="">    public function createMessage($message, array $context)</td>
+        </tr>
+            <tr>
+            <td class="info">23:<span class="">-</span>:</td>
+            <td class="">    {</td>
+        </tr>
+            <tr>
+            <td class="info">24:<span class="">-</span>:</td>
+            <td class="">        $this-&gt;context = $context;</td>
+        </tr>
+            <tr>
+            <td class="info">25:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">26:<span class="uncovered">0</span>:</td>
+            <td class="uncovered">        list($date, $time) = explode(&#039;;&#039;, strftime(self::DATE_FORMAT . &#039;;&#039; . self::TIME_FORMAT, time()));</td>
+        </tr>
+            <tr>
+            <td class="info">27:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">28:<span class="uncovered">0</span>:</td>
+            <td class="uncovered">        $this-&gt;messageScheme[&#039;date&#039;] = $date;</td>
+        </tr>
+            <tr>
+            <td class="info">29:<span class="">-</span>:</td>
+            <td class="">        $this-&gt;messageScheme[&#039;time&#039;] = $time;</td>
+        </tr>
+            <tr>
+            <td class="info">30:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">31:<span class="">-</span>:</td>
+            <td class="">        if (method_exists($message, &#039;__toString&#039;)) {</td>
+        </tr>
+            <tr>
+            <td class="info">32:<span class="">-</span>:</td>
+            <td class="">            $message = (string)$message;</td>
+        </tr>
+            <tr>
+            <td class="info">33:<span class="">-</span>:</td>
+            <td class="">        }</td>
+        </tr>
+            <tr>
+            <td class="info">34:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">35:<span class="">-</span>:</td>
+            <td class="">        $this-&gt;messageScheme[&#039;data&#039;] = $message;</td>
+        </tr>
+            <tr>
+            <td class="info">36:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">37:<span class="">-</span>:</td>
+            <td class="">        return $this;</td>
+        </tr>
+            <tr>
+            <td class="info">38:<span class="">-</span>:</td>
+            <td class="">    }</td>
+        </tr>
+            <tr>
+            <td class="info">39:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">40:<span class="">-</span>:</td>
+            <td class="">    /**</td>
+        </tr>
+            <tr>
+            <td class="info">41:<span class="">-</span>:</td>
+            <td class="">     * @return string</td>
+        </tr>
+            <tr>
+            <td class="info">42:<span class="">-</span>:</td>
+            <td class="">     */</td>
+        </tr>
+            <tr>
+            <td class="info">43:<span class="">-</span>:</td>
+            <td class="">    public function getMessage()</td>
+        </tr>
+            <tr>
+            <td class="info">44:<span class="">-</span>:</td>
+            <td class="">    {</td>
+        </tr>
+            <tr>
+            <td class="info">45:<span class="">-</span>:</td>
+            <td class="">        $this-&gt;message = json_encode($this-&gt;messageScheme);</td>
+        </tr>
+            <tr>
+            <td class="info">46:<span class="">-</span>:</td>
+            <td class="">        $this-&gt;buildContext($this-&gt;context);</td>
+        </tr>
+            <tr>
+            <td class="info">47:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+            <tr>
+            <td class="info">48:<span class="">-</span>:</td>
+            <td class="">        return $this-&gt;message;</td>
+        </tr>
+            <tr>
+            <td class="info">49:<span class="">-</span>:</td>
+            <td class="">    }</td>
+        </tr>
+            <tr>
+            <td class="info">50:<span class="">-</span>:</td>
+            <td class="">}</td>
+        </tr>
+            <tr>
+            <td class="info">51:<span class="">-</span>:</td>
+            <td class=""></td>
+        </tr>
+        </tbody>
+</table>
+
+<h2>Total coverage</h2>
+<p class="covered good">61.404%</p>
+
+<h2>Summary</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Coverage</th>
+        <th>Class</th>
+        <th>Source File</th>
+    </tr>
+    </thead>
+    <tbody>
+            <tr>
+            <td class="covered excellent">84.211%</td>
+            <td>SimpleLog\Log</td>
+            <td>/var/www/html/tests/CoverageClasses/log/src/Log.php</td>
+        </tr>
+            <tr>
+            <td class="covered excellent">100%</td>
+            <td>SimpleLog\LogStatic</td>
+            <td>/var/www/html/tests/CoverageClasses/log/src/LogStatic.php</td>
+        </tr>
+            <tr>
+            <td class="uncovered-class">0%</td>
+            <td>SimpleLog\Message\DefaultJsonMessage</td>
+            <td>/var/www/html/tests/CoverageClasses/log/src/DefaultJsonMessage.php</td>
+        </tr>
+        </tbody>
+</table>
+
+
+</body>
+</html>

@@ -3,7 +3,7 @@
     <project timestamp="1514801715">
         <package name="BlueEvent\Event\Base">
             <file name="{$path}event/src/Event.php">
-                <class name="Event" namespace="BlueEvent\Event\Base">
+                <class name="BlueEvent\Event\Base\Event" namespace="BlueEvent\Event\Base">
                     <metrics methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
                 </class>
                 <line num="46" type="method" name="__construct" crap="1" count="13"/>
@@ -25,7 +25,7 @@
                 <metrics loc="100" ncloc="50" classes="1" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="10" coveredstatements="10" elements="16" coveredelements="16"/>
             </file>
             <file name="{$path}event/src/EventDispatcher.php">
-                <class name="EventDispatcher" namespace="BlueEvent\Event\Base">
+                <class name="BlueEvent\Event\Base\EventDispatcher" namespace="BlueEvent\Event\Base">
                     <metrics methods="18" coveredmethods="18" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="77" elements="95" coveredelements="95"/>
                 </class>
                 <line num="66" type="method" name="__construct" crap="2" count="21"/>
@@ -126,7 +126,7 @@
                 <metrics loc="362" ncloc="223" classes="1" methods="18" coveredmethods="18" conditionals="0" coveredconditionals="0" statements="77" coveredstatements="77" elements="95" coveredelements="95"/>
             </file>
             <file name="{$path}event/src/EventLog.php">
-                <class name="EventLog" namespace="BlueEvent\Event\Base">
+                <class name="BlueEvent\Event\Base\EventLog" namespace="BlueEvent\Event\Base">
                     <metrics methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="19" coveredstatements="19" elements="22" coveredelements="22"/>
                 </class>
                 <line num="35" type="method" name="__construct" crap="3" count="24"/>

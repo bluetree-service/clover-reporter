@@ -52,6 +52,7 @@ class ParserTest extends TestCase
                 'files' => [
                     'package' => 'SimpleLog\Message',
                 ],
+                'log_file' => 'tests/reports/clover_log.xml',
             ],
             $parser->getInfoList()
         );
@@ -81,7 +82,7 @@ class ParserTest extends TestCase
                 [
                     'path' => '{$path}log/src/Log.php',
                     'package' => 'SimpleLog',
-                    'namespace' => 'Log',
+                    'namespace' => 'SimpleLog\Log',
                     'percent' => 84.210526315789465,
                     'info' => [
                             45  => '9',
@@ -127,7 +128,7 @@ class ParserTest extends TestCase
                 [
                     'path' => '{$path}log/src/LogStatic.php',
                     'package' => 'SimpleLog',
-                    'namespace' => 'LogStatic',
+                    'namespace' => 'SimpleLog\LogStatic',
                     'percent' => 100,
                     'info' => [
                             21 => '1',
@@ -151,7 +152,7 @@ class ParserTest extends TestCase
                 [
                     'path' => '{$path}log/src/DefaultJsonMessage.php',
                     'package' => 'SimpleLog\Message',
-                    'namespace' => 'DefaultJsonMessage',
+                    'namespace' => 'SimpleLog\Message\DefaultJsonMessage',
                     'percent' => 0,
                     'info' => [
                             18 => '0',
@@ -161,6 +162,7 @@ class ParserTest extends TestCase
                         ],
                 ],
             ],
+            'log_file' => 'tests/reports/clover_log.xml',
         ];
     }
 }

@@ -26,13 +26,6 @@ class Commands extends Command
             'build/logs/clover.xml'
         );
 
-        $this->addArgument(
-            'output',
-            InputArgument::OPTIONAL,
-            'destination of html report files',
-            \dirname(\getcwd()) . '/output'
-        );
-
         $this->addOption('open-browser', 'b', null, 'automatically open default browser with html report');
         $this->addOption('html', 'H', null, 'generate html report version');
         $this->addOption('show-coverage', 'c', null, 'show only classes with coverage in percent');
@@ -69,16 +62,10 @@ class Commands extends Command
 
         $infoList = $parser->getInfoList();
 
-        $render = new Render($input->getOptions(), $infoList, $style);
-
-        /** @todo in future make report generation in html */
         if ($input->getOption('html')) {
-            $render->htmlReport();
-        }
-
-        if ($input->getOption('open-browser') && $input->getOption('html')) {
-            $url = $input->getArgument('output') . '/index.html';
-            \shell_exec('x-www-browser' . $url);
+            $render = new Render\RenderHtml($input->getOptions(), $infoList, $style);
+        } else {
+            $render = new Render\RenderCli($input->getOptions(), $infoList, $style);
         }
 
         if ($input->getOption('short-report')) {
