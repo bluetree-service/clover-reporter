@@ -7,8 +7,6 @@ services:
       - ../build:/var/www/html/build
       - ${MOUNT_POINT}
     command: ${RUN_COMMAND}
-    environment:
-      - MEMCACHED_SERVERS=memcached85
 
 networks:
   backend85:

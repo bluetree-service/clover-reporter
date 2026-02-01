@@ -4,8 +4,6 @@ services:
     networks:
       - backend82
     command: ${RUN_COMMAND}
-    environment:
-      - MEMCACHED_SERVERS=memcached82
     volumes:
       - ${MOUNT_POINT}
 
