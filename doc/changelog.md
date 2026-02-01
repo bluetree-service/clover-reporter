@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.3.0.1 - 2026-02-01
+### Changed
+* Updated one of liberies version
+
 ## 0.3.0.0 - 2026-01-28
 ### Added
 * Composer scripts for testing
