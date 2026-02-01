@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.3.1.0 - 2026-02-01
+### Changed
+* Calculating percent by native script instead of using dependency
+### Removed
+* One of required libraries
+
 ## 0.3.0.2 - 2026-02-01
 ### Changed
 * Versions fix

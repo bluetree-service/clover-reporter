@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace CloverReporter;
 
-use BlueData\Calculation\Math;
 use Symfony\Component\Filesystem\Filesystem;
 
 class Parser
@@ -171,6 +170,10 @@ class Parser
      */
     protected function calculatePercent(int $all, int $percent): float
     {
-        return Math::numberToPercent($percent, $all) ?: 0;
+        if ($all === 0) {
+            return 0;
+        }
+
+        return ($percent / $all) * 100;
     }
 }

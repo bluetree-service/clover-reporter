@@ -4,63 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad0c2b3705962a3d9425b5b86c2739f1",
+    "content-hash": "18ee27e594707faf806e818073c5770a",
     "packages": [
-        {
-            "name": "bluetree-service/data",
-            "version": "0.5.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bluetree-service/data.git",
-                "reference": "2d0680986a92f84a0944822521e5285a8af4a8f5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bluetree-service/data/zipball/2d0680986a92f84a0944822521e5285a8af4a8f5",
-                "reference": "2d0680986a92f84a0944822521e5285a8af4a8f5",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dom": "*",
-                "php": "^8.2"
-            },
-            "require-dev": {
-                "phpdocumentor/reflection-docblock": "^6.0",
-                "phpunit/phpunit": "^11.5",
-                "roave/security-advisories": "dev-latest"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "BlueData\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Michał Adamiak",
-                    "email": "chajr@bluetree.pl",
-                    "homepage": "https://github.com/chajr",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Data storage and manipolation by container object",
-            "homepage": "https://github.com/bluetree-service/data",
-            "keywords": [
-                "bluetree",
-                "bluetree-service",
-                "data",
-                "xml"
-            ],
-            "support": {
-                "issues": "https://github.com/bluetree-service/data/issues",
-                "source": "https://github.com/bluetree-service/data/tree/0.5.0.0"
-            },
-            "time": "2026-02-01T19:23:00+00:00"
-        },
         {
             "name": "psr/container",
             "version": "2.0.2",
