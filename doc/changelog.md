@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.3.0.2 - 2026-02-01
+### Changed
+* Versions fix
+
 ## 0.3.0.1 - 2026-02-01
 ### Changed
 * Updated one of liberies version
