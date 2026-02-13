@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## 0.3.2.0 - 2026-02-10
+### Added
+* `-P` option to save HTML report in specified directory
+### Removed
+* Input file is now require
+* Open in browser option
+
 ## 0.3.1.0 - 2026-02-01
 ### Changed
 * Calculating percent by native script instead of using dependency

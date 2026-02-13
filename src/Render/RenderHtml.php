@@ -32,6 +32,11 @@ class RenderHtml extends Common implements RenderInterface
     public const TEMPLATE_PATH = __DIR__ . '/../';
 
     /**
+     * @var string
+     */
+    public const DEFAULT_PATH = __DIR__ . '/../../build/coverage_report.html';
+
+    /**
      * @var Environment
      */
     protected Environment $twig;
@@ -243,7 +248,8 @@ class RenderHtml extends Common implements RenderInterface
             $this->templateData
         );
 
-        \file_put_contents(__DIR__ . '/../../build/coverage_report.html', $content);
+        $path = !empty($this->options['html_path']) ? $this->options['html_path'] : self::DEFAULT_PATH;
+        \file_put_contents($path, $content);
 
         $this->style->formatSection('Execution time', $diff . ' sec');
         $this->style->formatSection(

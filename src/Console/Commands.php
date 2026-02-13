@@ -10,6 +10,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use CloverReporter\Parser;
 use CloverReporter\Render;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class Commands extends Command
 {
@@ -21,12 +24,11 @@ class Commands extends Command
 
         $this->addArgument(
             'report_file',
-            InputArgument::OPTIONAL,
-            'clover.xml report file',
-            'build/logs/clover.xml'
+            InputArgument::REQUIRED,
+            'clover.xml report file'
         );
 
-        $this->addOption('open-browser', 'b', null, 'automatically open default browser with html report');
+        $this->addOption('html_path', 'P', InputArgument::OPTIONAL, 'Path and file name to save html report');
         $this->addOption('html', 'H', null, 'generate html report version');
         $this->addOption('show-coverage', 'c', null, 'show only classes with coverage in percent');
         $this->addOption('short-report', 's', null, 'show coverage in percent per line with uncovered lines only');
@@ -44,6 +46,12 @@ class Commands extends Command
      * @param InputInterface $input
      * @param OutputInterface $output
      * @return int
+     * @throws LoaderError
+     * @throws RuntimeError
+     * @throws SyntaxError
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
